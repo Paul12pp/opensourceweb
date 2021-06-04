@@ -3,71 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using OpenSourceWeb.Data;
 using OpenSourceWeb.Models;
+using OpenSourceWeb.Models.Dto;
 
 namespace OpenSourceWeb.Interfaces
 {
-    public class CandidatoRepos : ICandidato
+    public  class CandidatoRepos : ICandidato
     {
         private readonly ApplicationDbContext _dbContext;
-        public CandidatoRepos(ApplicationDbContext dbContext)
+        public  CandidatoRepos(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public Candidatos AddCandidato(Candidatos model)
+        public async  Task<Candidatos> AddCandidato(Candidatos model)
         {
-            try
-            {
+
                 model.Estado = "Pendiente";
                 _dbContext.Candidatos.Add(model);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
                 return model;
-            }
-            catch (Exception)
-            {
-                return new Candidatos();
-            }
         }
 
-        public int AddCapacitaciones(int id, List<Capacitaciones> model, 
-            string competencias)
+        public async Task AddCapacitaciones(CapacitacionInputDto model)
         {
-            try
-            {
-                _dbContext.Capacitaciones.AddRange(model);
+
+                _dbContext.Capacitaciones.AddRange(model.capacitaciones);
                 var cand = _dbContext.Candidatos
-                    .SingleOrDefault(r => r.Id == id);
-                cand.Competencias = competencias;
-                _dbContext.SaveChanges();
-                return 200;
-            }
-            catch (Exception)
-            {
-                return 500;
-            }
+                    .SingleOrDefault(r => r.Id == model.Id);
+                cand.Competencias = model.Competencias;
+                await _dbContext.SaveChangesAsync();
+
         }
 
-        public int AddExperiencia(List<Experiencia> model)
+        public async Task AddExperiencia(List<Experiencia> model)
         {
-            try
-            {
+
                 _dbContext.Experiencia.AddRange(model);
-                _dbContext.SaveChanges();
-                return 200;
-            }
-            catch (Exception)
-            {
-                return 500;
-            }
+               await _dbContext.SaveChangesAsync();
         }
 
-        public int AprobarCandidato(int idcandidato)
+        public async Task AprobarCandidato(EstadoInputDto model)
         {
-            try
-            {
+
                 var cand = _dbContext.Candidatos
-                    .SingleOrDefault(r => r.Id == idcandidato);
+                    .SingleOrDefault(r => r.Id == model.Id);
                 cand.Estado = "Aprobado";
                 var emp = new Empleado
                 {
@@ -80,19 +61,13 @@ namespace OpenSourceWeb.Interfaces
                     Puesto = cand.Puestos.Nombre
                 };
                 _dbContext.Empleado.Add(emp);
-                _dbContext.SaveChanges();
-                return 200;
-            }
-            catch (Exception)
-            {
-                return 500;
-            }
+                await _dbContext.SaveChangesAsync();
+
         }
 
-        public int DeleteCandidato(int id)
+        public async Task DeleteCandidato(int id)
         {
-            try
-            {
+
                 var cand = _dbContext.Candidatos
                     .SingleOrDefault(r => r.Id == id);
                 if (cand != null)
@@ -103,24 +78,12 @@ namespace OpenSourceWeb.Interfaces
                     var exp = _dbContext.Experiencia.
                         Where(r => r.IdCandidato == id);
                     _dbContext.Experiencia.RemoveRange(exp);
-                    _dbContext.SaveChanges();
-                    return 200;
+                    await _dbContext.SaveChangesAsync();
                 }
-                else
-                {
-                    return 500;
-                }
-            }
-            catch (Exception)
-            {
-                return 500;
-            }
-        }
 
-        public int EditCandidato(int id, Candidatos model)
+        }
+        public async Task EditCandidato(int id, Candidatos model)
         {
-            try
-            {
                 var cand = _dbContext.Candidatos
                     .SingleOrDefault(r => r.Id == id);
                 cand.Nombre = model.Nombre;
@@ -128,33 +91,28 @@ namespace OpenSourceWeb.Interfaces
                 cand.IdDepartamento = model.IdDepartamento;
                 cand.Recomendado_p = model.Recomendado_p;
                 cand.Salario_Asp = model.Salario_Asp;
-                _dbContext.SaveChanges();
-                return 200;
-            }
-            catch (Exception)
-            {
-                return 500;
-            }
+                await _dbContext.SaveChangesAsync();
+
         }
 
-        public Candidatos GetCandidatoByCedula(string cedula)
+        public async Task<Candidatos> GetCandidatoByCedula(string cedula)
         {
-            var cand = _dbContext.Candidatos
-                .SingleOrDefault(r => r.Cedula == cedula);
+            var cand = await _dbContext.Candidatos
+                .SingleOrDefaultAsync(r => r.Cedula == cedula);
             return cand != null ? cand : new Candidatos();
         }
 
-        public Candidatos GetCandidatoById(int id)
+        public async Task<Candidatos> GetCandidatoById(int id)
         {
-            return _dbContext.Candidatos
-                .SingleOrDefault(r => r.Id == id);
+            return await _dbContext.Candidatos
+                .SingleOrDefaultAsync(r => r.Id == id);
         }
 
-        public IEnumerable<CandidatoViewModel> GetCandidatos()
+        public async Task<IEnumerable<CandidatoViewModel>> GetCandidatos()
         {
-            var data = _dbContext.Candidatos.
+            var data =await _dbContext.Candidatos.
                 Where(r=>r.Estado=="Pendiente")
-                .ToList();
+                .ToListAsync();
             List<CandidatoViewModel> list = new List<CandidatoViewModel>();
             foreach (var item in data)
             {
@@ -175,11 +133,11 @@ namespace OpenSourceWeb.Interfaces
             return list;
         }
 
-        public IEnumerable<CandidatoViewModel> GetCandidatosByPuestos(int idPuesto)
+        public async Task<IEnumerable<CandidatoViewModel>> GetCandidatosByPuestos(int idPuesto)
         {
-            var data = _dbContext.Candidatos
+            var data =await _dbContext.Candidatos
                 .Where(r => r.IdPuesto == idPuesto)
-               .ToList();
+               .ToListAsync();
             List<CandidatoViewModel> list = new List<CandidatoViewModel>();
             foreach (var item in data)
             {
@@ -200,11 +158,11 @@ namespace OpenSourceWeb.Interfaces
             return list;
         }
 
-        public IEnumerable<CapacitacionViewModel> GetCapacitacionByCandidato(int id)
+        public async Task<IEnumerable<CapacitacionViewModel>> GetCapacitacionByCandidato(int id)
         {
-            var data = _dbContext.Capacitaciones
+            var data =await _dbContext.Capacitaciones
                 .Where(r => r.IdCandidato == id)
-                .ToList();
+                .ToListAsync();
             List<CapacitacionViewModel> list = new List<CapacitacionViewModel>();
             foreach (var item in data)
             {
@@ -221,11 +179,11 @@ namespace OpenSourceWeb.Interfaces
             return list;
         }
 
-        public IEnumerable<ExperienciaViewModel> GetExperienciasByCandidato(int id)
+        public async Task<IEnumerable<ExperienciaViewModel>> GetExperienciasByCandidato(int id)
         {
-            var data = _dbContext.Experiencia
+            var data = await _dbContext.Experiencia
                 .Where(r => r.IdCandidato == id)
-                .ToList();
+                .ToListAsync();
             List<ExperienciaViewModel> list = new List<ExperienciaViewModel>();
             foreach (var item in data)
             {
@@ -242,29 +200,22 @@ namespace OpenSourceWeb.Interfaces
             return list;
         }
 
-        public int RechazarCandidato(int idcandidato)
+        public async Task RechazarCandidato(EstadoInputDto model)
         {
-            try
-            {
+
                 var cand = _dbContext.Candidatos
-                    .SingleOrDefault(r => r.Id == idcandidato);
+                    .SingleOrDefault(r => r.Id == model.Id);
                 cand.Estado = "Rechazado";
-                _dbContext.SaveChanges();
-                return 200;
-            }
-            catch (Exception)
-            {
-                return 500;
-            }
+                await _dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<CandidatoViewModel> Search(string nombre, int puesto, string comp, 
+        public async Task<IEnumerable<CandidatoViewModel>> Search(string nombre, int puesto, string comp, 
             decimal salarioD, decimal salarioH)
         {
-           var data = _dbContext.Candidatos
+           var data = await _dbContext.Candidatos
                 .Where(r => r.Nombre.Contains(nombre) && r.IdPuesto == puesto
                 && r.Competencias.Contains(comp))
-                .ToList();
+                .ToListAsync();
             if (salarioD > 0)
                 data.Where(r => r.Salario_Asp > salarioD && r.Salario_Asp < salarioH)
                     .ToList();

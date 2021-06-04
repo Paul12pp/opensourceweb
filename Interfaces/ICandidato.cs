@@ -1,4 +1,5 @@
 ﻿using OpenSourceWeb.Models;
+using OpenSourceWeb.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,20 @@ namespace OpenSourceWeb.Interfaces
 {
     public interface ICandidato
     {
-        IEnumerable<CandidatoViewModel> GetCandidatos();
-        IEnumerable<CandidatoViewModel> GetCandidatosByPuestos(int idPuesto);
-        Candidatos GetCandidatoById(int id);
-        Candidatos GetCandidatoByCedula(string cedula);
-        Candidatos AddCandidato(Candidatos model);
-        int EditCandidato(int id, Candidatos model);
-        int AddExperiencia(List<Experiencia> model);
-        IEnumerable<ExperienciaViewModel> GetExperienciasByCandidato(int id);
-        IEnumerable<CapacitacionViewModel> GetCapacitacionByCandidato(int id);
-        int AddCapacitaciones(int id, List<Capacitaciones> model,
-            string competencias);
-        int DeleteCandidato(int id);
-        IEnumerable<CandidatoViewModel> Search(string nombre, int puesto, string comp,
+        Task<IEnumerable<CandidatoViewModel>> GetCandidatos();
+        Task<Candidatos> GetCandidatoById(int id);
+        Task<IEnumerable<CandidatoViewModel>> GetCandidatosByPuestos(int idPuesto);
+        Task<Candidatos> GetCandidatoByCedula(string cedula);
+        Task<Candidatos> AddCandidato(Candidatos model);
+        Task EditCandidato(int id, Candidatos model);
+        Task AddExperiencia(List<Experiencia> model);
+        Task<IEnumerable<ExperienciaViewModel>> GetExperienciasByCandidato(int id);
+        Task<IEnumerable<CapacitacionViewModel>> GetCapacitacionByCandidato(int id);
+        Task AddCapacitaciones(CapacitacionInputDto model);
+        Task DeleteCandidato(int id);
+        Task<IEnumerable<CandidatoViewModel>> Search(string nombre, int puesto, string comp,
             decimal salarioD, decimal salarioH);
-        int AprobarCandidato(int idcandidato);
-        int RechazarCandidato(int idcandidato);
+        Task AprobarCandidato(EstadoInputDto model);
+        Task RechazarCandidato(EstadoInputDto model);
     }
 }
