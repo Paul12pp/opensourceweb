@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using OpenSourceWeb.Data;
 using OpenSourceWeb.Models;
+using OpenSourceWeb.Models.Dto;
 
 namespace OpenSourceWeb.Interfaces
 {
@@ -16,24 +18,16 @@ namespace OpenSourceWeb.Interfaces
             _dbContext = dbContext;
         }
 
-        public int AddEmpleado(Empleado model)
+        public async Task AddEmpleado(Empleado model)
         {
-            try
-            {
+
                 _dbContext.Empleado.Add(model);
-                _dbContext.SaveChanges();
-                return 200;
-            }
-            catch (Exception)
-            {
-                return 500;
-            }
+                await _dbContext.SaveChangesAsync();
         }
 
-        public int EditEmpleado(int idEmpleado, Empleado model)
+        public async Task EditEmpleado(int idEmpleado, Empleado model)
         {
-            try
-            {
+
                 var empleado = _dbContext.Empleado
                     .SingleOrDefault(r => r.Id == idEmpleado);
                 empleado.Nombre = model.Nombre;
@@ -42,34 +36,29 @@ namespace OpenSourceWeb.Interfaces
                 empleado.IdDepartamento = model.IdDepartamento;
                 empleado.Salario_M = model.Salario_M;
                 empleado.Estado = model.Estado;
-                _dbContext.SaveChanges();
-                return 200;
-            }
-            catch (Exception)
-            {
-                return 500;
-            }
+                await _dbContext.SaveChangesAsync();
         }
 
-        public Empleado GetEmpleadoById(int idEmpleado)
+        public async Task<Empleado> GetEmpleadoById(int idEmpleado)
         {
-            return _dbContext.Empleado
-                .SingleOrDefault(r => r.Id == idEmpleado);
+            return await _dbContext.Empleado
+                .SingleOrDefaultAsync(r => r.Id == idEmpleado);
         }
 
-        public IEnumerable<EmpleadoViewModel> GetEmpleados()
+        public async Task<IEnumerable<EmpleadoViewModel>> GetEmpleados()
         {
-            var data = _dbContext.Empleado
-                .ToList();
+            var data = await _dbContext.Empleado
+                .ToListAsync();
             List<EmpleadoViewModel> list = new List<EmpleadoViewModel>();
             foreach (var item in data)
             {
+                var desc = data.SingleOrDefault(r => r.Id == item.Id).Departamento.Descripcion;
                 list.Add(
                     new EmpleadoViewModel
                     {
                         Codigo = item.Id,
                         Nombre = item.Nombre,
-                        Departamento= data.SingleOrDefault(r=>r.Id==item.Id).Departamento.Descripcion,
+                        Departamento= desc,
                         Cedula=item.Cedula,
                         Fecha_Ing=item.Fecha_Ing.Value,
                         Puesto=item.Puesto,
@@ -91,11 +80,11 @@ namespace OpenSourceWeb.Interfaces
                 return new Empleado();
         }
 
-        public IEnumerable<Empleado> Search(DateTime desde, DateTime hasta)
+        public async Task<IEnumerable<Empleado>> Search(DateTime desde, DateTime hasta)
         {
-            var data = _dbContext.Empleado
+            var data = await _dbContext.Empleado
                 .Where(r => r.Fecha_Ing >= desde && r.Fecha_Ing <= hasta)
-                .ToList();
+                .ToListAsync();
             return data;
         }
     }

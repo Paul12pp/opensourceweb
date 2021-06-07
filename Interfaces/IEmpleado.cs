@@ -9,11 +9,11 @@ namespace OpenSourceWeb.Interfaces
 {
     public interface IEmpleado
     {
-        IEnumerable<EmpleadoViewModel> GetEmpleados();
-        int AddEmpleado(Empleado model);
-        int EditEmpleado(int idEmpleado, Empleado model);
-        Empleado GetEmpleadoById(int idEmpleado);
-        IEnumerable<Empleado> Search(DateTime desde, DateTime hasta);
-        Empleado Loggin(string cedula);
+        Task<IEnumerable<EmpleadoViewModel>> GetEmpleados();
+        Task AddEmpleado(Empleado model);
+        Task EditEmpleado(int idEmpleado, Empleado model);
+        Task<Empleado> GetEmpleadoById(int idEmpleado);
+        Task<IEnumerable<Empleado>> Search(DateTime desde, DateTime hasta);
+        //Empleado Loggin(string cedula);
     }
 }
