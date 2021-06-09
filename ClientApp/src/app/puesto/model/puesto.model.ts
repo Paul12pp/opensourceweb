@@ -6,3 +6,8 @@ export interface PuestoModel {
     nivel_Ma_Salarial: number;
     estado: boolean;
 }
+
+export interface DepartamentoModel {
+    id: number;
+    descripcion: string;
+}

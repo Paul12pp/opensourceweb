@@ -8,3 +8,7 @@ export interface EmpleadoModel {
     salario_M: number;
     estado: boolean;
 }
+export interface SearchEmpleadoInputModel {
+    desde: string;
+    hasta: string;
+}
