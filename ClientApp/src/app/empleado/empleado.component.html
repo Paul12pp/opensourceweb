@@ -1,0 +1,81 @@
+<h4>Mantenimiento de Empleados</h4>
+
+<div>
+    <form action="">
+        <div class="row mb-2">
+            <div class="col-3">
+                <input class="form-control" name="id" hidden />
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input class="form-control" name="nombre" id="nombre" />
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="cedula">Cedula</label>
+                    <input class="form-control" name="cedula" id="cedula" />
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label for="fechai">Fecha ingreso</label>
+                    <input type="date" class="form-control" name="fechai" id="fechai" />
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="departamento">Departamento</label>
+                    <select name="departamento" id="departamento" class="form-control"></select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="puesto">Puesto</label>
+                    <select name="puesto" id="puesto" class="form-control"></select>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label for="salario">Salario</label>
+                    <input type="number" class="form-control" name="salario" id="salario" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <select name="estado" id="estado" class="form-control">
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class="table-responsive mt-5">
+    <h6>Listado de idiomas</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
