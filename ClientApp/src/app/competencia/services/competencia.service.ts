@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { apiRoutes, getRoute } from 'src/app/api.routes';
+import { apiRoutes, getRoute } from 'src/app/core/api.routes';
 import { CompetenciaModel } from '../model/competencia.model';
 
 @Injectable({

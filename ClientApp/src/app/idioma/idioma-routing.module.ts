@@ -9,6 +9,7 @@ import { IdiomaComponent } from './idioma.component';
 const routes: Routes = [
   { path: '', component: IdiomaComponent, pathMatch: 'full' },
   { path: 'idioma', component: IdiomaComponent, },
+  { path: ':id', component: IdiomaComponent, },
   // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
 ];

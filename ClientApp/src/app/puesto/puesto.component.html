@@ -1,25 +1,35 @@
 <h4>Mantenimiento de Puestos</h4>
 
 <div>
-    <form action="">
+    <form #f="ngForm" (ngSubmit)="submit(f)" action="">
         <div class="row mb-2">
             <div class="col-3">
-                <input class="form-control" name="id" hidden />
+                <input class="form-control" [(ngModel)]="puesto.id" name="id" hidden />
                 <div class="form-group">
                     <label for="nombre">Descripción</label>
-                    <input class="form-control" name="nombre" id="nombre" />
+                    <input class="form-control" [(ngModel)]="puesto.nombre" name="nombre" id="nombre" required />
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="riesgo">Nivel de riesgo</label>
-                    <select name="riesgo" id="riesgo" class="form-control"></select>
+                    <label for="nivel_Riesgo">Nivel de riesgo</label>
+                    <select name="nivel_Riesgo" [(ngModel)]="puesto.nivel_Riesgo" id="nivel_Riesgo" class="form-control" required>
+                        <option value="" selected>Seleccione un nivel de riesgo</option>
+                        <option value="Muy Bajo">Muy Bajo</option>
+                        <option value="Bajo">Bajo</option>
+                        <option value="Medio">Medio</option>
+                        <option value="Alto">Alto</option>
+                        <option value="Muy Alto">Muy Alto</option>
+                    </select>
                 </div>
             </div>
             <div class="col-2">
                 <div class="form-group">
                     <label for="estado">Estado</label>
-                    <select name="estado" id="estado" class="form-control">
+                    <select name="estado" [(ngModel)]="puesto.estado" id="estado" class="form-control" required>
+                        <option value="" selected>Seleccione un estado</option>
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
                     </select>
                 </div>
             </div>
@@ -27,14 +37,14 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <label for="salariom">Salario minimo</label>
-                    <input type="number" class="form-control" name="salariom" id="salariom" />
+                    <label for="nivel_Mi_Salarial">Salario mínimo</label>
+                    <input type="number" class="form-control" [(ngModel)]="puesto.nivel_Mi_Salarial" name="nivel_Mi_Salarial" id="nivel_Mi_Salarial" required/>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="salarioma">Salario maximo</label>
-                    <input type="number" class="form-control" name="salarioma" id="salarioma" />
+                    <label for="nivel_Ma_Salarial">Salario máximo</label>
+                    <input type="number" class="form-control" [(ngModel)]="puesto.nivel_Ma_Salarial" name="nivel_Ma_Salarial" id="nivel_Ma_Salarial" required/>
                 </div>
             </div>
         </div>
@@ -54,13 +64,24 @@
         <thead>
             <tr>
                 <th>Código</th>
-                <th>Descripción</th>
+                <th>Nombre</th>
+                <th>Nivel Riesgo</th>
+                <th>Salario Mínimo</th>
+                <th>Salario Máximo</th>
                 <th>Estado</th>
                 <th>Acción</th>
             </tr>
         </thead>
         <tbody>
-
+            <tr *ngFor="let item of puestos">
+                <td>{{item.codigo}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.nivel_Riesgo}}</td>
+                <td>{{item.nivel_Mi_Salarial}}</td>
+                <td>{{item.nivel_Ma_Salarial}}</td>
+                <td>{{item.estado}}</td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 </div>

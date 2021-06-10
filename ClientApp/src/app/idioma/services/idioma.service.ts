@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { apiRoutes, getRoute } from 'src/app/api.routes';
+import { apiRoutes, getRoute } from 'src/app/core/api.routes';
 import { Observable } from 'rxjs';
 import { IdiomaModel } from '../model/idioma.model';
 
@@ -26,6 +26,7 @@ export class IdiomaService {
     return this.http.post(this.route, data);
   }
   edit(id: number, data: IdiomaModel) {
+    console.log('in servcies', data);
     this.route = getRoute(apiRoutes.idioma.edit);
     return this.http.post(this.route + `/${id}`, data);
   }

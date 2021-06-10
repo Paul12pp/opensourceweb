@@ -26,7 +26,8 @@ namespace OpenSourceWeb.Models
         public Nullable<decimal> Nivel_Mi_Salarial { get; set; }
         public Nullable<decimal> Nivel_Ma_Salarial { get; set; }
         public Nullable<bool> Estado { get; set; }
-    
+        public int IdDepartamento { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Candidatos> Candidatos { get; set; }
     }
