@@ -1,45 +1,52 @@
 <h4>Mantenimiento de Empleados</h4>
 
 <div>
-    <form action="">
+    <form #f="ngForm" (ngSubmit)="submit(f)" action="">
         <div class="row mb-2">
             <div class="col-3">
-                <input class="form-control" name="id" hidden />
+                <input class="form-control" [(ngModel)]="empleado.id" name="id" hidden />
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input class="form-control" name="nombre" id="nombre" />
+                    <input class="form-control" [(ngModel)]="empleado.nombre" name="nombre" id="nombre" required/>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
                     <label for="cedula">Cedula</label>
-                    <input class="form-control" name="cedula" id="cedula" />
+                    <input class="form-control" [(ngModel)]="empleado.cedula" name="cedula" id="cedula" required/>
                 </div>
             </div>
             <div class="col-2">
                 <div class="form-group">
-                    <label for="fechai">Fecha ingreso</label>
-                    <input type="date" class="form-control" name="fechai" id="fechai" />
+                    <label for="fecha_Ing">Fecha ingreso</label>
+                    <input type="date" class="form-control" [(ngModel)]="empleado.fecha_Ing" name="fecha_Ing" id="fecha_Ing" required/>
                 </div>
             </div>
         </div>
         <div class="row mb-2">
             <div class="col-3">
                 <div class="form-group">
-                    <label for="departamento">Departamento</label>
-                    <select name="departamento" id="departamento" class="form-control"></select>
+                    <label for="departamentoId">Departamento</label>
+                    <select [(ngModel)]="empleado.departamentoId" name="departamentoId" id="departamentoId" class="form-control">
+                        <option value="0" selected>Seleccione un departamento</option>
+                        <option *ngFor="let item of departamentos" [value]="item.id">{{item.descripcion}}</option>
+                    </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
                     <label for="puesto">Puesto</label>
-                    <select name="puesto" id="puesto" class="form-control"></select>
+                    <select [(ngModel)]="empleado.puesto" name="puesto" id="puesto" class="form-control">
+                        <option value="" selected>Seleccione un puesto</option>
+                        <option *ngFor="let item of puestos" [value]="item.nombre">{{item.nombre}}</option>
+                    
+                    </select>
                 </div>
             </div>
             <div class="col-2">
                 <div class="form-group">
-                    <label for="salario">Salario</label>
-                    <input type="number" class="form-control" name="salario" id="salario" />
+                    <label for="salario_M">Salario</label>
+                    <input type="number" class="form-control" [(ngModel)]="empleado.salario_M" name="salario_M" id="salario_M" />
                 </div>
             </div>
         </div>
@@ -47,8 +54,10 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="estado">Estado</label>
-                    <select name="estado" id="estado" class="form-control">
-
+                    <select [(ngModel)]="empleado.estado" name="estado" id="estado" class="form-control">
+                        <option value="" selected>Seleccione un estado</option>
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
                     </select>
                 </div>
             </div>

@@ -35,6 +35,7 @@ namespace OpenSourceWeb.Interfaces
                 puesto.Nivel_Ma_Salarial = model.Nivel_Ma_Salarial;
                 puesto.Nivel_Mi_Salarial = model.Nivel_Mi_Salarial;
                 puesto.Estado = model.Estado;
+            puesto.DepartamentoId = model.DepartamentoId;
                 await _dbContext.SaveChangesAsync();
 
         }
@@ -47,6 +48,7 @@ namespace OpenSourceWeb.Interfaces
 
         public async Task<IEnumerable<PuestoViewModel>> GetPuestos()
         {
+
             var data =await _dbContext.Puestos
                 .ToListAsync();
             List<PuestoViewModel> list = new List<PuestoViewModel>();

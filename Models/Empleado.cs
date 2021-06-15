@@ -11,18 +11,19 @@ namespace OpenSourceWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Empleado
     {
         public int Id { get; set; }
         public string Cedula { get; set; }
         public string Nombre { get; set; }
         public Nullable<System.DateTime> Fecha_Ing { get; set; }
-        public int IdDepartamento { get; set; }
+        public int DepartamentoId { get; set; }
         public string Puesto { get; set; }
         public Nullable<decimal> Salario_M { get; set; }
         public Nullable<bool> Estado { get; set; }
-    
+        [ForeignKey("DepartamentoId")]
         public virtual Departamento Departamento { get; set; }
     }
 }

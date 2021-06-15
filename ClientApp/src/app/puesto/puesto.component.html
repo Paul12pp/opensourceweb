@@ -47,6 +47,14 @@
                     <input type="number" class="form-control" [(ngModel)]="puesto.nivel_Ma_Salarial" name="nivel_Ma_Salarial" id="nivel_Ma_Salarial" required/>
                 </div>
             </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="departamentoId">Departamento</label>
+                    <select name="departamentoId" [(ngModel)]="puesto.departamentoId" id="departamentoId" class="form-control" required>
+                        <option value="0" selected>Seleccione un departamento</option>
+                        <option *ngFor="let item of departamentos" [value]="item.id">{{item.descripcion}}</option>
+                    </select> </div>
+            </div>
         </div>
         <div class="row mt-2">
             <div class="col-3">
@@ -80,7 +88,10 @@
                 <td>{{item.nivel_Mi_Salarial}}</td>
                 <td>{{item.nivel_Ma_Salarial}}</td>
                 <td>{{item.estado}}</td>
-                <td></td>
+                <td>
+                    <button (click)="edit(item.codigo)" class="btn btn-warning"><i class='bx bx-pencil'></i>Editar</button>
+                    <!-- <a [routerLink]="['/idioma', item.codigo]" class="btn btn-warning" ><i class='bx bx-pencil'></i>Editar</a> -->
+                </td>
             </tr>
         </tbody>
     </table>

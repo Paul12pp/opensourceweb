@@ -11,7 +11,8 @@ namespace OpenSourceWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Candidatos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,14 +25,15 @@ namespace OpenSourceWeb.Models
         public int Id { get; set; }
         public string Cedula { get; set; }
         public string Nombre { get; set; }
-        public int IdPuesto { get; set; }
-        public int IdDepartamento { get; set; }
+        public int PuestoId { get; set; }
+        public int DepartamentoId { get; set; }
         public Nullable<decimal> Salario_Asp { get; set; }
         public string Competencias { get; set; }
         public string Recomendado_p { get; set; }
         public string Estado { get; set; }
-    
+        [ForeignKey("DepartamentoId")]
         public virtual Departamento Departamento { get; set; }
+        [ForeignKey("PuestoId")]
         public virtual Puestos Puestos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Experiencia> Experiencia { get; set; }

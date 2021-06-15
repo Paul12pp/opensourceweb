@@ -3,8 +3,8 @@ export interface EmpleadoModel {
     cedula: string;
     nombre: string;
     fecha_Ing: string;
-    idDepartamento: number;
-    puesto: number;
+    departamentoId: number;
+    puesto: string;
     salario_M: number;
     estado: boolean;
 }

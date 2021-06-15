@@ -21,7 +21,7 @@ export class PuestoService {
     this.route = getRoute(apiRoutes.puesto.get);
     return this.http.get<any>(this.route + `/${id}`);
   }
-  getDpt(): Observable<DepartamentoModel> {
+  getDpt(): Observable<DepartamentoModel[]> {
     this.route = getRoute(apiRoutes.puesto.getdpt);
     return this.http.get<any>(this.route);
   }

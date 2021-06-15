@@ -11,7 +11,8 @@ namespace OpenSourceWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Capacitaciones
     {
         public int Id { get; set; }
@@ -20,8 +21,8 @@ namespace OpenSourceWeb.Models
         public Nullable<System.DateTime> Fecha_desde { get; set; }
         public Nullable<System.DateTime> Fecha_hasta { get; set; }
         public string Institucion { get; set; }
-        public Nullable<int> IdCandidato { get; set; }
-    
+        public Nullable<int> CandidatoId { get; set; }
+        [ForeignKey("CandidatoId")]
         public virtual Candidatos Candidatos { get; set; }
     }
 }

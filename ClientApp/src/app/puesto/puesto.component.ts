@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PuestoService } from './services/puesto.service';
-import { PuestoModel } from './model/puesto.model';
+import { PuestoModel, DepartamentoModel } from './model/puesto.model';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 
@@ -11,15 +11,20 @@ import { NgForm } from '@angular/forms';
 })
 export class PuestoComponent implements OnInit {
   puestos: any[] = [];
-  puesto: PuestoModel = { id: 0, nombre: '', estado: true, nivel_Riesgo: '', nivel_Ma_Salarial: 0, nivel_Mi_Salarial: 0 };
+  puesto: PuestoModel = {
+    id: 0, nombre: '',
+    estado: true, nivel_Riesgo: '', nivel_Ma_Salarial: 0, nivel_Mi_Salarial: 0, departamentoId: 0
+  };
+  departamentos: DepartamentoModel[] = [];
   constructor(private services: PuestoService) { }
 
   ngOnInit() {
     this.services.get()
-    .subscribe(result => {
-      console.log(result);
-      this.puesto = result;
-    });
+      .subscribe(result => {
+        console.log(result);
+        this.puestos = result;
+      });
+    this.services.getDpt().subscribe(result => this.departamentos = result);
   }
   refresh() {
     this.puestos = [];

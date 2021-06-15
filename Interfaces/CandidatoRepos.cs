@@ -57,7 +57,7 @@ namespace OpenSourceWeb.Interfaces
                     Estado = true,
                     Fecha_Ing = DateTime.Now,
                     Salario_M = cand.Salario_Asp,
-                    IdDepartamento = cand.IdDepartamento,
+                    DepartamentoId = cand.DepartamentoId,
                     Puesto = cand.Puestos.Nombre
                 };
                 _dbContext.Empleado.Add(emp);
@@ -73,10 +73,10 @@ namespace OpenSourceWeb.Interfaces
                 if (cand != null)
                 {
                     var cap = _dbContext.Capacitaciones
-                        .Where(r => r.IdCandidato == id);
+                        .Where(r => r.CandidatoId == id);
                     _dbContext.Capacitaciones.RemoveRange(cap);
                     var exp = _dbContext.Experiencia.
-                        Where(r => r.IdCandidato == id);
+                        Where(r => r.CandidatoId == id);
                     _dbContext.Experiencia.RemoveRange(exp);
                     await _dbContext.SaveChangesAsync();
                 }
@@ -87,8 +87,8 @@ namespace OpenSourceWeb.Interfaces
                 var cand = _dbContext.Candidatos
                     .SingleOrDefault(r => r.Id == id);
                 cand.Nombre = model.Nombre;
-                cand.IdPuesto = model.IdPuesto;
-                cand.IdDepartamento = model.IdDepartamento;
+                cand.PuestoId = model.PuestoId;
+                cand.DepartamentoId = model.DepartamentoId;
                 cand.Recomendado_p = model.Recomendado_p;
                 cand.Salario_Asp = model.Salario_Asp;
                 await _dbContext.SaveChangesAsync();
@@ -136,7 +136,7 @@ namespace OpenSourceWeb.Interfaces
         public async Task<IEnumerable<CandidatoViewModel>> GetCandidatosByPuestos(int idPuesto)
         {
             var data =await _dbContext.Candidatos
-                .Where(r => r.IdPuesto == idPuesto)
+                .Where(r => r.PuestoId == idPuesto)
                .ToListAsync();
             List<CandidatoViewModel> list = new List<CandidatoViewModel>();
             foreach (var item in data)
@@ -161,7 +161,7 @@ namespace OpenSourceWeb.Interfaces
         public async Task<IEnumerable<CapacitacionViewModel>> GetCapacitacionByCandidato(int id)
         {
             var data =await _dbContext.Capacitaciones
-                .Where(r => r.IdCandidato == id)
+                .Where(r => r.CandidatoId == id)
                 .ToListAsync();
             List<CapacitacionViewModel> list = new List<CapacitacionViewModel>();
             foreach (var item in data)
@@ -182,7 +182,7 @@ namespace OpenSourceWeb.Interfaces
         public async Task<IEnumerable<ExperienciaViewModel>> GetExperienciasByCandidato(int id)
         {
             var data = await _dbContext.Experiencia
-                .Where(r => r.IdCandidato == id)
+                .Where(r => r.CandidatoId == id)
                 .ToListAsync();
             List<ExperienciaViewModel> list = new List<ExperienciaViewModel>();
             foreach (var item in data)
@@ -213,7 +213,7 @@ namespace OpenSourceWeb.Interfaces
             decimal salarioD, decimal salarioH)
         {
            var data = await _dbContext.Candidatos
-                .Where(r => r.Nombre.Contains(nombre) && r.IdPuesto == puesto
+                .Where(r => r.Nombre.Contains(nombre) && r.PuestoId == puesto
                 && r.Competencias.Contains(comp))
                 .ToListAsync();
             if (salarioD > 0)

@@ -33,7 +33,7 @@ namespace OpenSourceWeb.Interfaces
                 empleado.Nombre = model.Nombre;
                 empleado.Cedula = model.Cedula;
                 empleado.Puesto = model.Puesto;
-                empleado.IdDepartamento = model.IdDepartamento;
+                empleado.DepartamentoId = model.DepartamentoId;
                 empleado.Salario_M = model.Salario_M;
                 empleado.Estado = model.Estado;
                 await _dbContext.SaveChangesAsync();
@@ -52,7 +52,7 @@ namespace OpenSourceWeb.Interfaces
             List<EmpleadoViewModel> list = new List<EmpleadoViewModel>();
             foreach (var item in data)
             {
-                var desc = data.SingleOrDefault(r => r.Id == item.Id).Departamento.Descripcion;
+                var desc = data.SingleOrDefault(r => r.Id == item.DepartamentoId).Departamento.Descripcion;
                 list.Add(
                     new EmpleadoViewModel
                     {
