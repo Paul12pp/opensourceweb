@@ -5,6 +5,7 @@ import { CandidatoComponent } from './candidato.component';
 import { PersonalComponent } from './personal/personal.component';
 import { SkillComponent } from './skill/skill.component';
 import { ExperienceComponent } from './experience/experience.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,6 +13,8 @@ import { ExperienceComponent } from './experience/experience.component';
   declarations: [CandidatoComponent, PersonalComponent, SkillComponent, ExperienceComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     CandidatoRoutingModule
   ]
 })

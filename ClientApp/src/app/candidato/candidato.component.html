@@ -1,16 +1,16 @@
-<div class="row text-center">
-    <h3 class="mb-2">Formulario de candidato</h3>
+<div class="row">
+    <h3 class="mb-2 text-center">Formulario de candidato</h3>
     <div class="col-4">
-        <button class="btn btn-secondary" (click)="changeTab(0)">Datos personales</button>
+        <button [ngClass]="{'btn-primary': show[0],'btn-secondary': !show[0]}" class="btn" (click)="changeTab(0)">Datos personales</button>
     </div>
     <div class="col-4">
-        <button class="btn btn-secondary" (click)="changeTab(1)">Habilidades</button>
+        <button [ngClass]="{'btn-primary': show[1],'btn-secondary': !show[1]}" class="btn" (click)="changeTab(1)">Habilidades</button>
     </div>
     <div class="col-4">
-        <button class="btn btn-secondary" (click)="changeTab(2)">Experiencias</button>
+        <button [ngClass]="{'btn-primary': show[2],'btn-secondary': !show[2]}" class="btn" (click)="changeTab(2)">Experiencias</button>
     </div>
     <div>
-        <app-personal *ngIf="show[0]"></app-personal>
+        <app-personal *ngIf="show[0]" [candidato]='candidato' [departamentos]="departamentos"></app-personal>
         <app-skill *ngIf="show[1]"></app-skill>
         <app-experience *ngIf="show[2]"></app-experience>
     </div>

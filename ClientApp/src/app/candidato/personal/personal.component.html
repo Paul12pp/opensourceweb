@@ -1,1 +1,42 @@
-<p>personal works!</p>
+<div class="card p-5 mt-3">
+    <div class="row">
+        <div class="col-2">
+            <img src="assets/img/profle.png" width="20%">
+        </div>
+        <div class="row col mb-2">
+            <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="candidato.cedula" name="cedula" placeholder="Cedula" aria-label="cedula">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="candidato.nombre" name="nombre" placeholder="Nombre" aria-label="Nombre">
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <h5>Laboral</h5>
+        <div class="col">
+            <select class="form-control" [(ngModel)]="candidato.puestoId" name="puestoId">
+            </select>
+        </div>
+        <div class="col">
+            <select class="form-control" [(ngModel)]="candidato.departamentoId" name="departamentoId">
+                    <option value="0" selected>Seleccione un departamento</option>
+                    <option *ngFor="let item of departamentos" [value]="item.id">{{item.descripcion}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="number" class="form-control" [(ngModel)]="candidato.salario_Asp" name="salario_Asp" placeholder="Aspiración salarial">
+        </div>
+    </div>
+    <div class="row mt-2">
+        <h5>Interes</h5>
+        <div class="col">
+            <textarea class="form-control" placeholder="¿Por qué desea trabajar con nosotros?"></textarea>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" [(ngModel)]="candidato.recomendado_p" name="recomendado_p" placeholder="Recomendado por">
+        </div>
+    </div>
+</div>

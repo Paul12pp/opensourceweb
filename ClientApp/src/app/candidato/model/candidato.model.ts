@@ -2,8 +2,8 @@ export interface CandidatoModel {
     id: number;
     cedula: string;
     nombre: string;
-    idPuesto: number;
-    idDepartamento: number;
+    puestoId: number;
+    departamentoId: number;
     salario_Asp: number;
     competencias: string;
     recomendado_p: string;

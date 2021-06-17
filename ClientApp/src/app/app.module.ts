@@ -23,9 +23,6 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     ApiAuthorizationModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

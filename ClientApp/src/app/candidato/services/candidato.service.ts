@@ -38,6 +38,14 @@ export class CandidatoService {
     this.route = getRoute(apiRoutes.candidato.getcapbycandidato);
     return this.http.get<any>(this.route + `/${id}`);
   }
+  getDpt() {
+    this.route = getRoute(apiRoutes.puesto.getdpt);
+    return this.http.get<any>(this.route);
+  }
+  getPt() {
+    this.route = getRoute(apiRoutes.puesto.get);
+    return this.http.get<any>(this.route);
+  }
   post(data: CandidatoModel) {
     this.route = getRoute(apiRoutes.candidato.post);
     return this.http.post(this.route, data);
