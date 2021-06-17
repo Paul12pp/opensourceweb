@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { DepartamentoModel, PuestoModel } from '../puesto/model/puesto.model';
 import { EmpleadoModel } from './model/empleado.model';
@@ -88,10 +89,16 @@ export class EmpleadoComponent implements OnInit {
     });
     this.services.getById(id).subscribe(result => {
       this.empleado = result;
+      this.empleado.fecha_Ing=moment(this.empleado.fecha_Ing).format('yyyy-MM-dd');
       console.log('empleado', this.empleado);
       Swal.close();
     });
     console.log('edit');
+  }
+
+  pattern(value:any){
+    console.log(value)
+    this.empleado.cedula= value.replace(/[^0-9]*/g, '');
   }
 
 }

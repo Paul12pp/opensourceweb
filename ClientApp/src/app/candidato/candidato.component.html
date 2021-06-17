@@ -1,0 +1,17 @@
+<div class="row text-center">
+    <h3 class="mb-2">Formulario de candidato</h3>
+    <div class="col-4">
+        <button class="btn btn-secondary" (click)="changeTab(0)">Datos personales</button>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-secondary" (click)="changeTab(1)">Habilidades</button>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-secondary" (click)="changeTab(2)">Experiencias</button>
+    </div>
+    <div>
+        <app-personal *ngIf="show[0]"></app-personal>
+        <app-skill *ngIf="show[1]"></app-skill>
+        <app-experience *ngIf="show[2]"></app-experience>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 // import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 // import { CounterComponent } from '../counter/counter.component';
 // import { FetchDataComponent } from '../fetch-data/fetch-data.component';
@@ -7,8 +8,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { PuestoComponent } from './puesto.component';
 
 const routes: Routes = [
-  { path: '', component: PuestoComponent, pathMatch: 'full' },
-  { path: 'puesto', component: PuestoComponent },
+  { path: '', component: PuestoComponent, pathMatch: 'full',canActivate: [AuthorizeGuard] },
+  { path: 'puesto', component: PuestoComponent,canActivate: [AuthorizeGuard] },
   // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
 ];

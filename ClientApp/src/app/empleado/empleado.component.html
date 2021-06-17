@@ -13,13 +13,13 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="cedula">Cedula</label>
-                    <input class="form-control" [(ngModel)]="empleado.cedula" name="cedula" id="cedula" required/>
+                    <input class="form-control" [(ngModel)]="empleado.cedula" (keyup)="pattern(empleado.cedula)" name="cedula" id="cedula" required/>
                 </div>
             </div>
             <div class="col-2">
                 <div class="form-group">
                     <label for="fecha_Ing">Fecha ingreso</label>
-                    <input type="date" class="form-control" [(ngModel)]="empleado.fecha_Ing" name="fecha_Ing" id="fecha_Ing" required/>
+                    <input [disabled]="empleado.id!=0&&empleado.id!=null" type="datetime-local" class="form-control" [(ngModel)]="empleado.fecha_Ing" name="fecha_Ing" id="fecha_Ing" required/>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="departamentoId">Departamento</label>
-                    <select [(ngModel)]="empleado.departamentoId" name="departamentoId" id="departamentoId" class="form-control">
+                    <select [(ngModel)]="empleado.departamentoId" name="departamentoId" id="departamentoId" class="form-control" required>
                         <option value="0" selected>Seleccione un departamento</option>
                         <option *ngFor="let item of departamentos" [value]="item.id">{{item.descripcion}}</option>
                     </select>
@@ -36,7 +36,7 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="puesto">Puesto</label>
-                    <select [(ngModel)]="empleado.puesto" name="puesto" id="puesto" class="form-control">
+                    <select [(ngModel)]="empleado.puesto" name="puesto" id="puesto" class="form-control" required>
                         <option value="" selected>Seleccione un puesto</option>
                         <option *ngFor="let item of puestos" [value]="item.nombre">{{item.nombre}}</option>
                     
@@ -46,7 +46,7 @@
             <div class="col-2">
                 <div class="form-group">
                     <label for="salario_M">Salario</label>
-                    <input type="number" class="form-control" [(ngModel)]="empleado.salario_M" name="salario_M" id="salario_M" />
+                    <input type="number" class="form-control" [(ngModel)]="empleado.salario_M" name="salario_M" id="salario_M" required />
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="estado">Estado</label>
-                    <select [(ngModel)]="empleado.estado" name="estado" id="estado" class="form-control">
+                    <select [(ngModel)]="empleado.estado" name="estado" id="estado" class="form-control" required>
                         <option value="" selected>Seleccione un estado</option>
                         <option value="true">Activo</option>
                         <option value="false">Inactivo</option>
@@ -78,13 +78,27 @@
         <thead>
             <tr>
                 <th>Código</th>
-                <th>Descripción</th>
-                <th>Estado</th>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Puesto</th>
+                <th>Departamento</th>
+                <th>Salario</th>
                 <th>Acción</th>
             </tr>
         </thead>
         <tbody>
-
+            <tr *ngFor="let item of empleados">
+                <td>{{item.codigo}}</td>
+                <td>{{item.cedula}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.puesto}}</td>
+                <td>{{item.departamento}}</td>
+                <td>{{item.salario_M|currency}}</td>
+                <td>{{item.fecha_Ing|date:'shortDate'}}</td>
+                <td>
+                    <button (click)="edit(item.codigo)" class="btn btn-warning"><i class='bx bx-pencil'></i>Editar</button>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

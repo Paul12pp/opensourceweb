@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 // import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 // import { CounterComponent } from '../counter/counter.component';
 // import { FetchDataComponent } from '../fetch-data/fetch-data.component';
@@ -7,9 +8,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IdiomaComponent } from './idioma.component';
 
 const routes: Routes = [
-  { path: '', component: IdiomaComponent, pathMatch: 'full' },
-  { path: 'idioma', component: IdiomaComponent, },
-  { path: ':id', component: IdiomaComponent, },
+  { path: '', component: IdiomaComponent, pathMatch: 'full',canActivate: [AuthorizeGuard] },
+  { path: 'idioma', component: IdiomaComponent, canActivate: [AuthorizeGuard]},
+  { path: ':id', component: IdiomaComponent,canActivate: [AuthorizeGuard] },
   // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
 ];

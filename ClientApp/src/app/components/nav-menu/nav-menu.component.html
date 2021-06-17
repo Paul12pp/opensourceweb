@@ -1,8 +1,8 @@
-<header [class]="'header '+headerpdC" id="header">
+<header [class]="'header '+headerpdC" id="header" *ngIf="(isAuthenticated | async)">
     <div [class]="'header_toggle '+toggleC"> <i class='bx bx-menu' id="header-toggle" (click)="toggle()"></i> </div>
     <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
 </header>
-<div [class]="'l-navbar '+navC" id="nav-bar">
+<div [class]="'l-navbar '+navC" id="nav-bar" *ngIf="(isAuthenticated | async)">
     <nav class="nav">
         <div>
             <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">BBBootstrap</span> </a>
@@ -18,16 +18,16 @@
                     <a [routerLink]="['home/fetch-data']" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a>
                 </div>
                 <div [routerLinkActive]="['active']">
-                    <a [routerLink]="['/puesto']" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Puestos</span> </a>
+                    <a [routerLink]="['/puesto']" class="nav_link"> <i class='bx bx-store nav_icon'></i> <span class="nav_name">Puestos</span> </a>
                 </div>
                 <div [routerLinkActive]="['active']">
                     <a [routerLink]="['/idioma']" class="nav_link"> <i class='bx bx-at nav_icon'></i> <span class="nav_name">Idiomas</span> </a>
                 </div>
                 <div [routerLinkActive]="['active']">
-                    <a [routerLink]="['/competencia']" class="nav_link"> <i class='bx bx-at nav_icon'></i> <span class="nav_name">Competencias</span> </a>
+                    <a [routerLink]="['/competencia']" class="nav_link"> <i class='bx bx-dumbbell nav_icon'></i> <span class="nav_name">Competencias</span> </a>
                 </div>
                 <div [routerLinkActive]="['active']">
-                    <a [routerLink]="['/empleado']" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Empleado</span> </a>
+                    <a [routerLink]="['/empleado']" class="nav_link"> <i class='bx bx-user  nav_icon'></i> <span class="nav_name">Empleado</span> </a>
 
                 </div>
                 <div [routerLinkActive]="['active']">

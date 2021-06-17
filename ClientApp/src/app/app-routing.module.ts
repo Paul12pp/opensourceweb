@@ -7,6 +7,7 @@ import { ApiAuthorizationModule } from '../api-authorization/api-authorization.m
 import { CompetenciaModule } from './competencia/competencia.module';
 import { PuestoModule } from './puesto/puesto.module';
 import { EmpleadoModule } from './empleado/empleado.module';
+import { LandingModule } from './landing/landing.module';
 const routes: Routes = [
   {
     path: 'home',
@@ -46,8 +47,15 @@ const routes: Routes = [
       )
   },
   {
+    path: 'landing',
+    loadChildren: () =>
+      import('./landing/landing.module').then(
+        m => m.LandingModule
+      )
+  },
+  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'landing',
     pathMatch: 'full'
   }
 ];

@@ -36,7 +36,8 @@ namespace OpenSourceWeb.Interfaces
                 empleado.DepartamentoId = model.DepartamentoId;
                 empleado.Salario_M = model.Salario_M;
                 empleado.Estado = model.Estado;
-                await _dbContext.SaveChangesAsync();
+                //empleado.Fecha_Ing = model.Estado;
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Empleado> GetEmpleadoById(int idEmpleado)
@@ -49,10 +50,12 @@ namespace OpenSourceWeb.Interfaces
         {
             var data = await _dbContext.Empleado
                 .ToListAsync();
+            var dpt = await _dbContext.Departamento
+                .ToListAsync();
             List<EmpleadoViewModel> list = new List<EmpleadoViewModel>();
             foreach (var item in data)
             {
-                var desc = data.SingleOrDefault(r => r.Id == item.DepartamentoId).Departamento.Descripcion;
+                var desc = dpt.SingleOrDefault(r => r.Id == item.DepartamentoId).Descripcion;
                 list.Add(
                     new EmpleadoViewModel
                     {

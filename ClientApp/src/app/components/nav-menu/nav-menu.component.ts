@@ -1,17 +1,28 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
   isExpanded = false;
-  navC = "";
-  toggleC = "";
-  bodypdC = "";
-  headerpdC = "";
+  navC = '';
+  toggleC = '';
+  bodypdC = '';
+  headerpdC = '';
+  public isAuthenticated: Observable<boolean>;
+  constructor(private authorizeService: AuthorizeService) {
 
+  }
+  ngOnInit() {
+    this.isAuthenticated = this.authorizeService.isAuthenticated();
+    if (!this.isAuthenticated) {
+      //document.querySelector('body').style.paddingLeft = '20px';
+    }
+  }
 
   collapse() {
     this.isExpanded = false;
