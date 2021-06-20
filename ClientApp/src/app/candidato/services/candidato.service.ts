@@ -46,6 +46,10 @@ export class CandidatoService {
     this.route = getRoute(apiRoutes.puesto.get);
     return this.http.get<any>(this.route);
   }
+  getCpt() {
+    this.route = getRoute(apiRoutes.competencia.get);
+    return this.http.get<any>(this.route);
+  }
   post(data: CandidatoModel) {
     this.route = getRoute(apiRoutes.candidato.post);
     return this.http.post(this.route, data);

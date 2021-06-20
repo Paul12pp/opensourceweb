@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidatoModel } from './model/candidato.model';
+import { CandidatoModel, CapacitacionModel } from './model/candidato.model';
 import { CandidatoService } from './services/candidato.service';
 
 @Component({
@@ -21,19 +21,26 @@ export class CandidatoComponent implements OnInit {
     estado: false,
   };
   departamentos: any[] = [];
+  puestos: any[] = [];
+  competencias: any[] = [];
+  capacitacion: CapacitacionModel[];
   constructor(private services: CandidatoService) { }
 
   ngOnInit() {
     this.show = [true, false, false];
     this.services.getDpt()
       .subscribe(result => this.departamentos = result);
+    this.services.getPt()
+      .subscribe(result => this.puestos = result);
+    this.services.getCpt()
+      .subscribe(result => this.competencias = result);
   }
   changeTab(id: number) {
-    this.show.forEach((element, i) => {
-      this.show[i] = false;
-    });
-    this.show[id] = true;
-    console.log(this.candidato);
+    // this.show.forEach((element, i) => {
+    //   this.show[i] = false;
+    // });
+    // this.show[id] = true;
+    // console.log(this.candidato);
   }
 
 }

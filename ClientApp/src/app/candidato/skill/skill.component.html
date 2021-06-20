@@ -1,78 +1,90 @@
-<div class="card p-5 mt-3">
-    <div class="row mb-2">
-        <h5>Competencias</h5>
-        <div class="col-4">
-            <select class="form-control" name="departamento">
-            </select>
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div class="card p-5 mt-3">
+        <div class="row mb-2">
+            <h5>Competencias</h5>
+            <div class="col-4">
+                <select class="form-control" [(ngModel)]="candidato.competencias" name="competencias" multiple required>
+                    <option value="0" disabled>Seleccione un competencias</option>
+                    <option *ngFor="let item of competencias" [value]="item.descripcion">{{item.descripcion}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <h5>Capaciataciones</h5>
+            <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="capacitacion[0].descripcion" name="descripcion0" placeholder="Descripción" aria-label="descripción" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control " [(ngModel)]="capacitacion[0].nivel" name="nivel0" placeholder="Nivel" aria-label="nivel" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="capacitacion[0].institucion" name="institucion0" placeholder="Institución" aria-label="institución" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input type="date" class="form-control" [(ngModel)]="capacitacion[0].fecha_desde" name="fecha_desde0" placeholder="Desde" aria-label="Desde" required>
+            </div>
+            <div class="col-4">
+                <input type="date" class="form-control" [(ngModel)]="capacitacion[0].fecha_hasta" name="fecha_hasta0" placeholder="Hasta" aria-label="Hasta" required>
+            </div>
+            <hr class="mt-3" />
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <input type="text" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].descripcion" name="descripcion1" placeholder="Descripción" aria-label="descripción">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].nivel" name="nivel1" placeholder="Nivel" aria-label="nivel">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].institucion" name="institucion1" placeholder="Institución" aria-label="institución">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input type="date" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].fecha_desde" name="fecha_desde1" placeholder="Desde" aria-label="Desde">
+            </div>
+            <div class="col-4">
+                <input type="date" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].fecha_hasta" name="fecha_hasta1" placeholder="Hasta" aria-label="Hasta">
+            </div>
+            <div class="col-4">
+                <button class="btn btn-warning mr-2" (click)="add(1)" type="button">Agregar</button>
+                <button class="btn btn-primary m-2" (click)="quit(1)" type="button">Quitar</button>
+            </div>
+            <hr class="mt-3" />
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <input type="text" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].descripcion" name="descripcion2" placeholder="Descripción" aria-label="descripción">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].nivel" name="nivel2" placeholder="Nivel" aria-label="nivel">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].institucion" name="institucion2" placeholder="Institución" aria-label="institución">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input type="date" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].fecha_desde" name="fecha_desde2" placeholder="Desde" aria-label="Desde">
+            </div>
+            <div class="col-4">
+                <input type="date" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].fecha_hasta" name="fecha_hasta2" placeholder="Hasta" aria-label="Hasta">
+            </div>
+            <div class="col-4">
+                <button class="btn btn-warning mr-2" (click)="add(2)" type="button">Agregar</button>
+                <button class="btn btn-primary m-2" (click)="quit(2)" type="button">Quitar</button>
+            </div>
+            <hr class="mt-4" />
+        </div>
+        <div class="row mt-2 justify-content-end">
+            <div class="col">
+                <button type="button" class="btn btn-success" (click)="changeTab(0)">Atras</button>
+            </div>
+            <div class="col align-self-end">
+                <button type="submit" class="btn btn-success">Siguiente</button>
+            </div>
         </div>
     </div>
-    <div class="row mb-2">
-        <h5>Capaciataciones</h5>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Descripción" aria-label="descripción">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Nivel" aria-label="nivel">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Institución" aria-label="institución">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Desde" aria-label="Desde">
-        </div>
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Hasta" aria-label="Hasta">
-        </div>
-        <hr class="mt-3" />
-    </div>
-    <div class="row mb-2">
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Descripción" aria-label="descripción">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Nivel" aria-label="nivel">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Institución" aria-label="institución">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Desde" aria-label="Desde">
-        </div>
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Hasta" aria-label="Hasta">
-        </div>
-        <div class="col-4">
-            <button class="btn btn-warning mr-2">Agregar</button>
-            <button class="btn btn-primary m-2">Quitar</button>
-        </div>
-        <hr class="mt-3" />
-    </div>
-    <div class="row mb-2">
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Descripción" aria-label="descripción">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Nivel" aria-label="nivel">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Institución" aria-label="institución">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Desde" aria-label="Desde">
-        </div>
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Hasta" aria-label="Hasta">
-        </div>
-        <div class="col-4">
-            <button class="btn btn-warning mr-2">Agregar</button>
-            <button class="btn btn-primary m-2">Quitar</button>
-        </div>
-        <hr class="mt-4" />
-    </div>
-</div>
+</form>
