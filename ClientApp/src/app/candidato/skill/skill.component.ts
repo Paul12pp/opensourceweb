@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CandidatoModel, CapacitacionModel } from '../model/candidato.model';
@@ -10,9 +10,11 @@ import { CandidatoModel, CapacitacionModel } from '../model/candidato.model';
 })
 export class SkillComponent implements OnInit {
   @Input() candidato: CandidatoModel;
-  @Input() competencias: any[];
+  @Input() competencias: [];
   @Input() show: any[];
-  @Input() capacitacion: CapacitacionModel[] = [];
+  capacitacion: CapacitacionModel[] = [];
+  @Output() public submitEvent = new EventEmitter<any[]>();
+  // capacitacion: CapacitacionModel[] = [];
   disabled = [false, true, true];
   constructor() { }
 
@@ -41,14 +43,25 @@ export class SkillComponent implements OnInit {
   }
   quit(index: number) {
     this.disabled[index] = true;
+    this.capacitacion[index] = {
+      id: 0, descripcion: '', fecha_desde: '',
+      fecha_hasta: '', institucion: '', idCandidato: this.candidato.id,
+      nivel: ''
+    };
   }
   submit(f: NgForm) {
     console.log(f);
     console.log(this.capacitacion);
     if (f.valid) {
       console.log(this.disabled);
-      const temp = this.capacitacion.filter(r => r.descripcion !== '');
-      console.log(temp);
+      this.capacitacion = this.capacitacion.filter(r => r.descripcion !== '');
+      const values = f.value;
+      this.candidato.competencias = '';
+      values.competencias.forEach((element, i) => {
+        this.candidato.competencias += i === (values.length - 1) ? element : element + ', ';
+      });
+      console.log(this.capacitacion);
+      this.submitEvent.emit(this.capacitacion);
       this.changeTab(2);
     } else {
       Swal.fire({

@@ -7,7 +7,11 @@ export interface CandidatoModel {
     salario_Asp: number;
     competencias: string;
     recomendado_p: string;
-    estado: boolean;
+}
+export interface CandidatoInputDto {
+    candidato: CandidatoModel;
+    experiencia: ExperienciaModel[];
+    capacitacion: CapacitacionModel[];
 }
 
 export interface ExperienciaModel {
@@ -18,6 +22,10 @@ export interface ExperienciaModel {
     fecha_hasta: string;
     salario: number;
     idCandidato: number;
+}
+
+export interface EstadoInputDto{
+    id:number;
 }
 
 export interface CapacitacionModel {
@@ -34,4 +42,11 @@ export interface CapacitacionInputModel {
     id: number;
     capacitaciones: CapacitacionModel[];
     competencias: string;
+}
+export interface SearchCandidatoInputDto{
+    nombre:string;
+    puesto:number;
+    competencia:string;
+    salarioD:number;
+    salarioH:number;
 }

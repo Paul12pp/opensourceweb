@@ -1,0 +1,81 @@
+<h4>Consulta</h4>
+
+<div>
+    <form #f="ngForm" (ngSubmit)="submit(f)" action="">
+        <div class="row mb-2">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input class="form-control" [(ngModel)]="buscar.nombre" name="nombre" id="nombre" required />
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="puesto">Puestos</label>
+                    <select [(ngModel)]="buscar.puesto" name="puesto" id="puesto" class="form-control" required>
+                        <option value="0" selected>Seleccione un puesto</option>
+                        <option *ngFor="let item of puestos" [value]="item.codigo">{{item.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="competencia">Descripción</label>
+                    <input class="form-control" [(ngModel)]="buscar.competencia" name="competencia" id="competencia" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="salarioD">Salario Desde</label>
+                    <input type="number" class="form-control" [(ngModel)]="buscar.salarioD" name="salarioD" id="salarioD" required />
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="salarioH">Salario Hasta</label>
+                    <input type="number" class="form-control" [(ngModel)]="buscar.salarioH" name="salarioH" id="salarioH" required />
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group m-2">
+                    <button class="btn btn-warning m-2" (click)="limpiar()">Limpiar</button>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="table-responsive mt-5">
+    <h6>Conulta</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Cedula</th>
+                <th>Departamento</th>
+                <th>Puesto</th>
+                <th>Competencias</th>
+                <th>Salario Aspira</th>
+                <th>Recomendado Por</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of candidatos">
+                <td>{{item.codigo}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.cedula}}</td>
+                <td>{{item.departamento}}</td>
+                <td>{{item.puesto}}</td>
+                <td>{{item.competencias}}</td>
+                <td>{{item.salario_Asp}}</td>
+                <td>{{item.recomendado_p}}</td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -19,6 +19,8 @@ export class PersonalComponent implements OnInit {
   ngOnInit() {
   }
   submit(f: NgForm) {
+    // console.log(f.value);
+    // alert(this.validaCedula(f.value.cedula));
     if (f.valid) {
       this.changeTab(1);
     } else {
@@ -35,5 +37,31 @@ export class PersonalComponent implements OnInit {
     });
     this.show[id] = true;
     console.log(this.candidato);
+  }
+  validaCedula(pCedula: string) {
+    console.log(pCedula);
+    let vnTotal = 0;
+    const vcCedula = pCedula.replace('-', '');
+    const pLongCed = vcCedula.trim().length;
+    const digitoMult = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1];
+
+    if (pLongCed < 11 || pLongCed > 11) {
+      return false;
+    }
+
+    for (let vDig = 1; vDig <= pLongCed; vDig++) {
+      const vCalculo = Number(vcCedula.substring(vDig - 1, 1)) * digitoMult[vDig - 1];
+      if (vCalculo < 10) {
+        vnTotal += vCalculo;
+      } else {
+        vnTotal += Number(vCalculo.toString().substring(0, 1)) + Number(vCalculo.toString().substring(1, 1));
+      }
+    }
+
+    if (vnTotal % 10 === 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -17,13 +17,21 @@ namespace OpenSourceWeb.Interfaces
         {
             _dbContext = dbContext;
         }
-        public async  Task<Candidatos> AddCandidato(Candidatos model)
+        public async  Task<Candidatos> AddCandidato(CandidatoInputDto model)
         {
-
-                model.Estado = "Pendiente";
-                _dbContext.Candidatos.Add(model);
-                await _dbContext.SaveChangesAsync();
-                return model;
+                //candidato
+            model.Candidato.Estado = "Pendiente";
+            _dbContext.Candidatos.Add(model.Candidato);
+                //await _dbContext.SaveChangesAsync();
+            //capaticationes
+            _dbContext.Capacitaciones.AddRange(model.Capacitacion);
+            model.Candidato.Capacitaciones = model.Capacitacion;
+            //experiencias
+            _dbContext.Experiencia.AddRange(model.Experiencia);
+            model.Candidato.Experiencia = model.Experiencia;
+            //save
+            await _dbContext.SaveChangesAsync();
+            return model.Candidato;
         }
 
         public async Task AddCapacitaciones(CapacitacionInputDto model)
@@ -48,6 +56,7 @@ namespace OpenSourceWeb.Interfaces
         {
 
                 var cand = _dbContext.Candidatos
+                    .Include(p=>p.Puestos)
                     .SingleOrDefault(r => r.Id == model.Id);
                 cand.Estado = "Aprobado";
                 var emp = new Empleado
@@ -58,7 +67,7 @@ namespace OpenSourceWeb.Interfaces
                     Fecha_Ing = DateTime.Now,
                     Salario_M = cand.Salario_Asp,
                     DepartamentoId = cand.DepartamentoId,
-                    Puesto = cand.Puestos.Nombre
+                    Puesto = cand.Puestos.Nombre,
                 };
                 _dbContext.Empleado.Add(emp);
                 await _dbContext.SaveChangesAsync();
@@ -105,6 +114,10 @@ namespace OpenSourceWeb.Interfaces
         public async Task<Candidatos> GetCandidatoById(int id)
         {
             return await _dbContext.Candidatos
+                .Include(c=>c.Capacitaciones)
+                .Include(e=>e.Experiencia)
+                .Include(e=>e.Puestos)
+                .Include(e=>e.Departamento)
                 .SingleOrDefaultAsync(r => r.Id == id);
         }
 
@@ -112,8 +125,13 @@ namespace OpenSourceWeb.Interfaces
         {
             var data =await _dbContext.Candidatos.
                 Where(r=>r.Estado=="Pendiente")
+                .Include(d=>d.Departamento)
+                .Include(p=>p.Puestos)
+                .ToListAsync();
+            var dpt = await _dbContext.Departamento
                 .ToListAsync();
             List<CandidatoViewModel> list = new List<CandidatoViewModel>();
+
             foreach (var item in data)
             {
                 list.Add(
@@ -137,6 +155,8 @@ namespace OpenSourceWeb.Interfaces
         {
             var data =await _dbContext.Candidatos
                 .Where(r => r.PuestoId == idPuesto)
+                .Include(r=>r.Puestos)
+                .Include(d=>d.Departamento)
                .ToListAsync();
             List<CandidatoViewModel> list = new List<CandidatoViewModel>();
             foreach (var item in data)
@@ -209,15 +229,16 @@ namespace OpenSourceWeb.Interfaces
                 await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<CandidatoViewModel>> Search(string nombre, int puesto, string comp, 
-            decimal salarioD, decimal salarioH)
+        public async Task<IEnumerable<CandidatoViewModel>> Search(SeachCandidatoInputDto model)
         {
            var data = await _dbContext.Candidatos
-                .Where(r => r.Nombre.Contains(nombre) && r.PuestoId == puesto
-                && r.Competencias.Contains(comp))
+                .Include(d=>d.Departamento)
+                .Include(d=>d.Puestos)
+                .Where(r => r.Nombre.Contains(model.nombre) && r.PuestoId == model.puesto
+                && r.Competencias.Contains(model.competencia))
                 .ToListAsync();
-            if (salarioD > 0)
-                data.Where(r => r.Salario_Asp > salarioD && r.Salario_Asp < salarioH)
+            if (model.salarioD > 0)
+                data.Where(r => r.Salario_Asp > model.salarioD && r.Salario_Asp < model.salarioH)
                     .ToList();
             List<CandidatoViewModel> list = new List<CandidatoViewModel>();
             foreach (var item in data)

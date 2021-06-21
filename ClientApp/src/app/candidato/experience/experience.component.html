@@ -1,79 +1,81 @@
-<div class="card p-5 mt-3">
-    <div class="row mb-2">
-        <h5>Experiencia Laboral</h5>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Empresa" aria-label="Empresa">
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div class="card p-5 mt-3">
+        <div class="row mb-2">
+            <h5>Experiencia Laboral</h5>
+            <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="experiencia[0].empresa" name="empresa0" placeholder="Empresa" aria-label="Empresa" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="experiencia[0].puesto" name="puesto0" placeholder="Puesto" aria-label="Puesto" required>
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" [(ngModel)]="experiencia[0].salario" name="salario0" placeholder="Salario" aria-label="Salario" required>
+            </div>
         </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Puesto" aria-label="Puesto">
+        <div class="row">
+            <div class="col-4">
+                <input type="date" class="form-control" [(ngModel)]="experiencia[0].fecha_desde" name="fecha_desde0" placeholder="Desde" aria-label="Desde" required>
+            </div>
+            <div class="col-4">
+                <input type="date" class="form-control" [(ngModel)]="experiencia[0].fecha_hasta" name="fecha_hasta0" placeholder="Hasta" aria-label="Hasta" required>
+            </div>
+            <hr class="mt-3" />
         </div>
-        <div class="col">
-            <input type="number" class="form-control" placeholder="Salario" aria-label="Salario">
+        <div class="row mb-2">
+            <div class="col">
+                <input type="text" [disabled]="disabled[1]" class="form-control" [(ngModel)]="experiencia[1].empresa" name="empresa1" placeholder="Empresa" aria-label="Empresa">
+            </div>
+            <div class="col">
+                <input type="text" [disabled]="disabled[1]" class="form-control" [(ngModel)]="experiencia[1].puesto" name="puesto1" placeholder="Puesto" aria-label="Puesto">
+            </div>
+            <div class="col">
+                <input type="number" [disabled]="disabled[1]" class="form-control" [(ngModel)]="experiencia[1].salario" name="salario1" placeholder="Salario" aria-label="Salario">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input type="date" [disabled]="disabled[1]" class="form-control" [(ngModel)]="experiencia[1].fecha_desde" name="fecha_desde1" placeholder="Desde" aria-label="Desde">
+            </div>
+            <div class="col-4">
+                <input type="date" [disabled]="disabled[1]" class="form-control" [(ngModel)]="experiencia[1].fecha_hasta" name="fecha_hasta1" placeholder="Hasta" aria-label="Hasta">
+            </div>
+            <div class="col-4">
+                <button class="btn btn-warning mr-2" (click)="add(1)" type="button">Agregar</button>
+                <button class="btn btn-primary m-2" (click)="quit(1)" type="button">Quitar</button>
+            </div>
+            <hr class="mt-3" />
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <input type="text" [disabled]="disabled[2]" class="form-control" [(ngModel)]="experiencia[2].empresa" name="empresa2" placeholder="Empresa" aria-label="Empresa">
+            </div>
+            <div class="col">
+                <input type="text" [disabled]="disabled[2]" class="form-control" [(ngModel)]="experiencia[2].puesto" name="puesto2" placeholder="Puesto" aria-label="Puesto">
+            </div>
+            <div class="col">
+                <input type="number" [disabled]="disabled[2]" class="form-control" [(ngModel)]="experiencia[2].salario" name="salario2" placeholder="Salario" aria-label="Salario">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input type="date" [disabled]="disabled[2]" class="form-control" [(ngModel)]="experiencia[2].fecha_desde" name="fecha_desde2" placeholder="Desde" aria-label="Desde">
+            </div>
+            <div class="col-4">
+                <input type="date" [disabled]="disabled[2]" class="form-control" [(ngModel)]="experiencia[2].fecha_hasta" name="fecha_hasta2" placeholder="Hasta" aria-label="Hasta">
+            </div>
+            <div class="col-4">
+                <button class="btn btn-warning mr-2" (click)="add(2)" type="button">Agregar</button>
+                <button class="btn btn-primary m-2" (click)="quit(2)" type="button">Quitar</button>
+            </div>
+            <hr class="mt-3" />
+        </div>
+        <div class="row mt-2 justify-content-end">
+            <div class="col">
+                <button type="button" class="btn btn-success" (click)="changeTab(1)">Atras</button>
+            </div>
+            <div class="col align-self-end">
+                <button type="submit" class="btn btn-success">Finalizar</button>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Desde" aria-label="Desde">
-        </div>
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Hasta" aria-label="Hasta">
-        </div>
-        <hr class="mt-3" />
-    </div>
-    <div class="row mb-2">
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Empresa" aria-label="Empresa">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Puesto" aria-label="Puesto">
-        </div>
-        <div class="col">
-            <input type="number" class="form-control" placeholder="Salario" aria-label="Salario">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Desde" aria-label="Desde">
-        </div>
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Hasta" aria-label="Hasta">
-        </div>
-        <div class="col-4">
-            <button class="btn btn-warning mr-2">Agregar</button>
-            <button class="btn btn-primary m-2">Quitar</button>
-        </div>
-        <hr class="mt-3" />
-    </div>
-    <div class="row mb-2">
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Empresa" aria-label="Empresa">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Puesto" aria-label="Puesto">
-        </div>
-        <div class="col">
-            <input type="number" class="form-control" placeholder="Salario" aria-label="Salario">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Desde" aria-label="Desde">
-        </div>
-        <div class="col-4">
-            <input type="date" class="form-control" placeholder="Hasta" aria-label="Hasta">
-        </div>
-        <div class="col-4">
-            <button class="btn btn-warning mr-2">Agregar</button>
-            <button class="btn btn-primary m-2">Quitar</button>
-        </div>
-        <hr class="mt-3" />
-    </div>
-    <div class="row mt-2 justify-content-end">
-        <div class="col">
-            <button type="button" class="btn btn-success" (click)="changeTab(1)">Atras</button>
-        </div>
-        <div class="col align-self-end">
-            <button type="submit" class="btn btn-success">Finalizar</button>
-        </div>
-    </div>
-</div>
+</form>

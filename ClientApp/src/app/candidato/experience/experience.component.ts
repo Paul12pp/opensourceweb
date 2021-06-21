@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CandidatoModel, ExperienciaModel } from '../model/candidato.model';
@@ -11,14 +11,65 @@ import { CandidatoModel, ExperienciaModel } from '../model/candidato.model';
 export class ExperienceComponent implements OnInit {
   @Input() candidato: CandidatoModel;
   @Input() show: any[];
+  @Output() public submitEvent = new EventEmitter<any[]>();
   experiencia: ExperienciaModel[] = [];
+  disabled = [false, true, true];
   constructor() { }
 
   ngOnInit() {
+    this.experiencia = [
+      {
+        id: 0,
+        empresa: '',
+        puesto: '',
+        fecha_desde: '',
+        fecha_hasta: '',
+        salario: 0,
+        idCandidato: 0,
+      },
+      {
+        id: 0,
+        empresa: '',
+        puesto: '',
+        fecha_desde: '',
+        fecha_hasta: '',
+        salario: 0,
+        idCandidato: 0,
+      },
+      {
+        id: 0,
+        empresa: '',
+        puesto: '',
+        fecha_desde: '',
+        fecha_hasta: '',
+        salario: 0,
+        idCandidato: 0,
+      }
+    ];
+  }
+  add(index: number) {
+    this.disabled[index] = false;
+  }
+  quit(index: number) {
+    this.disabled[index] = true;
+    this.experiencia[index] = {
+      id: 0,
+      empresa: '',
+      puesto: '',
+      fecha_desde: '',
+      fecha_hasta: '',
+      salario: 0,
+      idCandidato: 0,
+    };
   }
   submit(f: NgForm) {
+    console.log(f);
+    console.log(this.experiencia);
     if (f.valid) {
-      this.changeTab(1);
+      console.log(this.disabled);
+      //this.experiencia = this.experiencia.filter(r => r.empresa !== '');
+      console.log(this.experiencia);
+      this.submitEvent.emit(this.experiencia.filter(r => r.empresa !== ''));
     } else {
       Swal.fire({
         icon: 'error',
@@ -32,7 +83,6 @@ export class ExperienceComponent implements OnInit {
       this.show[i] = false;
     });
     this.show[id] = true;
-    console.log(this.candidato);
   }
 
 }

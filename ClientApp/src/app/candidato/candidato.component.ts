@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidatoModel, CapacitacionModel } from './model/candidato.model';
+import Swal from 'sweetalert2';
+import { CandidatoModel, CapacitacionModel, ExperienciaModel, CandidatoInputDto } from './model/candidato.model';
 import { CandidatoService } from './services/candidato.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-candidato',
@@ -18,13 +20,14 @@ export class CandidatoComponent implements OnInit {
     salario_Asp: 0,
     competencias: '',
     recomendado_p: '',
-    estado: false,
   };
   departamentos: any[] = [];
   puestos: any[] = [];
   competencias: any[] = [];
   capacitacion: CapacitacionModel[];
-  constructor(private services: CandidatoService) { }
+  experiencia: ExperienciaModel[] = [];
+  validFull = false;
+  constructor(private services: CandidatoService, private router: Router) { }
 
   ngOnInit() {
     this.show = [true, false, false];
@@ -41,6 +44,31 @@ export class CandidatoComponent implements OnInit {
     // });
     // this.show[id] = true;
     // console.log(this.candidato);
+  }
+  onSubmitFull(data: any) {
+    this.capacitacion = data;
+    console.log(this.capacitacion);
+  }
+  onSubmitFull2(data: any) {
+    this.experiencia = data;
+    console.log(this.experiencia);
+    Swal.fire({
+      title: 'Procesando',
+      showConfirmButton: false,
+      willOpen: () => {
+        Swal.showLoading();
+      }
+    });
+    const dataInput: CandidatoInputDto = {
+      candidato: this.candidato,
+      experiencia: this.experiencia,
+      capacitacion: this.capacitacion
+    }
+    this.services.post(dataInput)
+      .subscribe(result => {
+        Swal.close();
+        this.router.navigate(['/']);
+      });
   }
 
 }

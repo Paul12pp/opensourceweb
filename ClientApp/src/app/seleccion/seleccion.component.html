@@ -1,0 +1,132 @@
+<h4>Seleecion</h4>
+
+<div class="row">
+    <div class="col-3">
+        <div class="form-group">
+            <label for="puesto">Puestos</label>
+            <select [(ngModel)]="puesto" name="puesto" id="puesto" class="form-control" required>
+                <option value="0" selected>Seleccione un puesto</option>
+                <option *ngFor="let item of puestos" [value]="item.codigo">{{item.nombre}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col m-2">
+        <button class="btn btn-warning m-2" (click)="refresh()">Cancelar</button>
+        <button class="btn btn-primary" (click)="filtrar()">Filtrar</button>
+    </div>
+</div>
+<div class="table-responsive mt-5">
+    <h6>Listado de Candidatos</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Cedula</th>
+                <th>Departamento</th>
+                <th>Puesto</th>
+                <th>Competencias</th>
+                <th>Salario Aspira</th>
+                <th>Recomendado Por</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of candidatos">
+                <td>{{item.codigo}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.cedula}}</td>
+                <td>{{item.departamento}}</td>
+                <td>{{item.puesto}}</td>
+                <td>{{item.competencias}}</td>
+                <td>{{item.salario_Asp}}</td>
+                <td>{{item.recomendado_p}}</td>
+                <td>
+                    <button type="button" class="btn btn-warning" (click)="getbyId(item.codigo)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class='bx bx-user-detail'></i>Ver</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Perfil Candidato</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <p> <b>Nombre: </b>{{candidato?.nombre}} </p>
+                        <p> <b>Cedula: </b>{{candidato?.cedula}} </p>
+                    </div>
+                    <div class="col">
+                        <p> <b>Puesto aspira: </b>{{candidato?.puestos.nombre}} </p>
+                        <p> <b>Departamento: </b>{{candidato?.departamento.descripcion}} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p> <b>Aspiracion salarial: </b>{{candidato?.salario_Asp|currency}} </p>
+                        <p> <b>Competencias: </b>{{candidato?.competencias}} </p>
+                    </div>
+                    <div class="col">
+                        <p> <b>Recomendado por: </b>{{candidato?.recomendado_p}} </p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <h6>Capacitaciones</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Nivel</th>
+                                <th>Institucion</th>
+                                <th>Desde</th>
+                                <th>Hasta</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="candidato?.capacitaciones">
+                            <tr *ngFor="let item of candidato.capacitaciones">
+                                <td>{{item.descripcion}}</td>
+                                <td>{{item.nivel}}</td>
+                                <td>{{item.institucion}}</td>
+                                <td>{{item.fecha_desde}}</td>
+                                <td>{{item.fecha_hasta}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <h6>Experiencias</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Puesto</th>
+                                <th>Desde</th>
+                                <th>Hasta</th>
+                                <th>Salario</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="candidato?.experiencia">
+                            <tr *ngFor="let item of candidato.experiencia">
+                                <td>{{item.empresa}}</td>
+                                <td>{{item.puesto}}</td>
+                                <td>{{item.fecha_desde}}</td>
+                                <td>{{item.fecha_hasta}}</td>
+                                <td>{{item.salario}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="rechazar(candidato?.id)" data-bs-dismiss="modal">Rechazar</button>
+                <button type="button" class="btn btn-primary" (click)="aprobar(candidato?.id)" data-bs-dismiss="modal">Aprobar</button>
+            </div>
+        </div>
+    </div>
+</div>

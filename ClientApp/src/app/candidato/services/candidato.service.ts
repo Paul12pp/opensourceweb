@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiRoutes, getRoute } from 'src/app/core/api.routes';
-import { CandidatoModel, CapacitacionInputModel, ExperienciaModel } from '../model/candidato.model';
+import { CandidatoInputDto, CandidatoModel, CapacitacionInputModel, ExperienciaModel, EstadoInputDto, SearchCandidatoInputDto } from '../model/candidato.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class CandidatoService {
     this.route = getRoute(apiRoutes.candidato.get);
     return this.http.get<any>(this.route);
   }
-  getById(id: number): Observable<CandidatoModel> {
+  getById(id: number): Observable<any> {
     this.route = getRoute(apiRoutes.candidato.get);
     return this.http.get<any>(this.route + `/${id}`);
   }
@@ -50,7 +50,7 @@ export class CandidatoService {
     this.route = getRoute(apiRoutes.competencia.get);
     return this.http.get<any>(this.route);
   }
-  post(data: CandidatoModel) {
+  post(data: CandidatoInputDto) {
     this.route = getRoute(apiRoutes.candidato.post);
     return this.http.post(this.route, data);
   }
@@ -70,12 +70,16 @@ export class CandidatoService {
     this.route = getRoute(apiRoutes.candidato.delete);
     return this.http.delete(this.route + `/${id}`);
   }
-  aprobar(id: number) {
+  aprobar(data: EstadoInputDto) {
     this.route = getRoute(apiRoutes.candidato.aprobar);
-    return this.http.delete(this.route + `/${id}`);
+    return this.http.post(this.route + `/${data.id}`, data);
   }
-  rechazar(id: number) {
+  rechazar(data: EstadoInputDto) {
     this.route = getRoute(apiRoutes.candidato.rechazar);
-    return this.http.delete(this.route + `/${id}`);
+    return this.http.post(this.route + `/${data.id}`, data);
+  }
+  search(data: SearchCandidatoInputDto) {
+    this.route = getRoute(apiRoutes.candidato.search);
+    return this.http.post<any>(this.route, data);
   }
 }

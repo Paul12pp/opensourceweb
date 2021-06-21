@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeModule } from './home/home.module';
-import { IdiomaModule } from './idioma/idioma.module';
-import { CandidatoModule } from './candidato/candidato.module';
-import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
-import { CompetenciaModule } from './competencia/competencia.module';
-import { PuestoModule } from './puesto/puesto.module';
-import { EmpleadoModule } from './empleado/empleado.module';
-import { LandingModule } from './landing/landing.module';
 const routes: Routes = [
   {
     path: 'home',
@@ -38,6 +30,16 @@ const routes: Routes = [
     path: 'empleado',
     loadChildren: () =>
       import('./empleado/empleado.module').then(m => m.EmpleadoModule)
+  },
+  {
+    path: 'consulta',
+    loadChildren: () =>
+      import('./consulta/consulta.module').then(m => m.ConsultaModule)
+  },
+  {
+    path: 'seleccion',
+    loadChildren: () =>
+      import('./seleccion/seleccion.module').then(m => m.SeleccionModule)
   },
   {
     path: 'authentication',

@@ -35,7 +35,8 @@ export const apiRoutes = {
         edit: 'api/candidato/edit',
         delete: 'api/candidato/delete',
         aprobar: 'api/candidato/aprobar',
-        rechazar: 'api/candidato/rechazar'
+        rechazar: 'api/candidato/rechazar',
+        search:'api/candidato/search'
     }
 };
 

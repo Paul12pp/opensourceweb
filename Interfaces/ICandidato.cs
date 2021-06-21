@@ -14,15 +14,14 @@ namespace OpenSourceWeb.Interfaces
         Task<Candidatos> GetCandidatoById(int id);
         Task<IEnumerable<CandidatoViewModel>> GetCandidatosByPuestos(int idPuesto);
         Task<Candidatos> GetCandidatoByCedula(string cedula);
-        Task<Candidatos> AddCandidato(Candidatos model);
+        Task<Candidatos> AddCandidato(CandidatoInputDto model);
         Task EditCandidato(int id, Candidatos model);
         Task AddExperiencia(List<Experiencia> model);
         Task<IEnumerable<ExperienciaViewModel>> GetExperienciasByCandidato(int id);
         Task<IEnumerable<CapacitacionViewModel>> GetCapacitacionByCandidato(int id);
         Task AddCapacitaciones(CapacitacionInputDto model);
         Task DeleteCandidato(int id);
-        Task<IEnumerable<CandidatoViewModel>> Search(string nombre, int puesto, string comp,
-            decimal salarioD, decimal salarioH);
+        Task<IEnumerable<CandidatoViewModel>> Search(SeachCandidatoInputDto model);
         Task AprobarCandidato(EstadoInputDto model);
         Task RechazarCandidato(EstadoInputDto model);
     }

@@ -41,7 +41,7 @@ namespace OpenSourceWeb.Controllers
             return await _services.GetCandidatoByCedula(cedula);
         }
         [HttpPost("post")]
-        public async Task<IActionResult> PostCandidato(Candidatos model)
+        public async Task<IActionResult> PostCandidato(CandidatoInputDto model)
         {
             if (ModelState.IsValid)
             {
@@ -134,6 +134,11 @@ namespace OpenSourceWeb.Controllers
                 return BadRequest();
             }
 
+        }
+        [HttpPost("search")]
+        public async Task<IEnumerable<CandidatoViewModel>> Search(SeachCandidatoInputDto model)
+        {
+            return await _services.Search(model);
         }
     }
 }
