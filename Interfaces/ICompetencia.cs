@@ -10,6 +10,7 @@ namespace OpenSourceWeb.Interfaces
     public interface ICompetencia
     {
         Task<IEnumerable<CompetenciaViewModel>> GetCompetencias();
+        Task<IEnumerable<CompetenciaViewModel>> GetCompetenciasA();
         Task AddCompetencia(Competencias model);
         Task EditCompetencia(int idCompetencia, Competencias model);
         Task<Competencias> GetCompetenciaById(int idCompetencia);

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenSourceWeb.Data;
 using OpenSourceWeb.Models;
 using OpenSourceWeb.Models.Dto;
+using OpenSourceWeb.Models.ViewModels;
 
 namespace OpenSourceWeb.Interfaces
 {
@@ -197,6 +198,24 @@ namespace OpenSourceWeb.Interfaces
                 });
             }
             return list;
+        }
+
+        public async Task<DashboardViewModel> GetDashboard()
+        {
+            var emp = await _dbContext.Empleado
+                .CountAsync();
+            var cand = await _dbContext.Candidatos
+                .Where(r=>r.Estado=="Pendiente")
+                .CountAsync();
+            var vct = await _dbContext.Puestos
+                .Where(r => r.Estado == true)
+                .CountAsync();
+            return new DashboardViewModel
+            {
+                candidatos = cand,
+                empleados = emp,
+                vacantes = vct
+            };
         }
 
         public async Task<IEnumerable<ExperienciaViewModel>> GetExperienciasByCandidato(int id)

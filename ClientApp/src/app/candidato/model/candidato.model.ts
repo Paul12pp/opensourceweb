@@ -24,8 +24,8 @@ export interface ExperienciaModel {
     idCandidato: number;
 }
 
-export interface EstadoInputDto{
-    id:number;
+export interface EstadoInputDto {
+    id: number;
 }
 
 export interface CapacitacionModel {
@@ -43,10 +43,15 @@ export interface CapacitacionInputModel {
     capacitaciones: CapacitacionModel[];
     competencias: string;
 }
-export interface SearchCandidatoInputDto{
-    nombre:string;
-    puesto:number;
-    competencia:string;
-    salarioD:number;
-    salarioH:number;
+export interface SearchCandidatoInputDto {
+    nombre: string;
+    puesto: number;
+    competencia: string;
+    salarioD: number;
+    salarioH: number;
+}
+export interface DashboardModel {
+    empleados: number;
+    candidatos: number;
+    vacantes: number;
 }

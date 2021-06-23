@@ -23,6 +23,11 @@ namespace OpenSourceWeb.Controllers
         {
             return await _services.GetPuestos();
         }
+        [HttpGet("getactive")]
+        public async Task<IEnumerable<PuestoViewModel>> GetPuestosA()
+        {
+            return await _services.GetPuestosA();
+        }
 
         [HttpGet("get/{id}")]
         public async Task<Puestos> GetPuesto(int id)

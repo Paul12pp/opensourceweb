@@ -8,11 +8,13 @@ export const apiRoutes = {
     },
     competencia: {
         get: 'api/competencia/get',
+        getActive: 'api/competencia/getactive',
         post: 'api/competencia/post',
         edit: 'api/competencia/edit',
     },
     puesto: {
         get: 'api/puesto/get',
+        getActive: 'api/puesto/getactive',
         getdpt: 'api/puesto/getdpt',
         post: 'api/puesto/post',
         edit: 'api/puesto/edit',
@@ -29,6 +31,7 @@ export const apiRoutes = {
         getbycedula: 'api/candidato/getbycedula',
         getexpbycandidato: 'api/candidato/getexpbycandidato',
         getcapbycandidato: 'api/candidato/getcapbycandidato',
+        getdashboard: 'api/candidato/getdashboard',
         post: 'api/candidato/post',
         postexp: 'api/candidato/postexp',
         postcap: 'api/candidato/postcap',
@@ -36,7 +39,7 @@ export const apiRoutes = {
         delete: 'api/candidato/delete',
         aprobar: 'api/candidato/aprobar',
         rechazar: 'api/candidato/rechazar',
-        search:'api/candidato/search'
+        search: 'api/candidato/search'
     }
 };
 

@@ -27,10 +27,10 @@ export class EmpleadoService {
     return this.http.get<any>(this.route);
   }
   getPt(): Observable<any> {
-    this.route = getRoute(apiRoutes.puesto.get);
+    this.route = getRoute(apiRoutes.puesto.getActive);
     return this.http.get<any>(this.route);
   }
-  search(data: SearchEmpleadoInputModel): Observable<EmpleadoModel> {
+  search(data: SearchEmpleadoInputModel): Observable<any> {
     this.route = getRoute(apiRoutes.empleado.search);
     return this.http.get<any>(this.route + `?desde=${data.desde}&hasta=${data.hasta}`);
   }

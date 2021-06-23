@@ -1,5 +1,6 @@
 ﻿using OpenSourceWeb.Models;
 using OpenSourceWeb.Models.Dto;
+using OpenSourceWeb.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +25,6 @@ namespace OpenSourceWeb.Interfaces
         Task<IEnumerable<CandidatoViewModel>> Search(SeachCandidatoInputDto model);
         Task AprobarCandidato(EstadoInputDto model);
         Task RechazarCandidato(EstadoInputDto model);
+        Task<DashboardViewModel> GetDashboard();
     }
 }

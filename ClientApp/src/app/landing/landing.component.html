@@ -22,6 +22,7 @@
                     <div class="col-8">
                         <a href="/Identity/Account/Login" class="btn btn-primary m-2">Iniciar sesión</a>
                         <a [routerLink]="['/candidato']" class="btn btn-primary m-2">Postularme</a>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary m-2">Consultar</button>
                     </div>
                     <div class="col-2">
                     </div>
@@ -30,6 +31,31 @@
                     <div class="col-6">
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Consulta estatus</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="cedula">Cédula</label>
+                    <input type="text" class="form-control" [(ngModel)]="cedula" name="cedula" (keyup)="pattern(cedula)" />
+                </div>
+                <div class="form-group mt-2 text-center">
+                    <button type="button" (click)="consulta()" class="btn btn-primary">Verificar</button>
+                </div>
+                <div *ngIf="validText!=''" class="form-group mt-2 text-center">
+                    <h6>{{validText}}</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="clean()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>

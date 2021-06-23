@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiRoutes, getRoute } from 'src/app/core/api.routes';
-import { CandidatoInputDto, CandidatoModel, CapacitacionInputModel, ExperienciaModel, EstadoInputDto, SearchCandidatoInputDto } from '../model/candidato.model';
+import { CandidatoInputDto, CandidatoModel, CapacitacionInputModel, ExperienciaModel, EstadoInputDto, SearchCandidatoInputDto, DashboardModel } from '../model/candidato.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +26,9 @@ export class CandidatoService {
     this.route = getRoute(apiRoutes.candidato.getbypuestos);
     return this.http.get<any>(this.route + `/${id}`);
   }
-  getbycedula(id: number) {
+  getbycedula(ced: string) {
     this.route = getRoute(apiRoutes.candidato.getbycedula);
-    return this.http.get<any>(this.route + `/${id}`);
+    return this.http.get<any>(this.route + `/${ced}`);
   }
   getexpbycandidato(id: number) {
     this.route = getRoute(apiRoutes.candidato.getexpbycandidato);
@@ -43,11 +43,15 @@ export class CandidatoService {
     return this.http.get<any>(this.route);
   }
   getPt() {
-    this.route = getRoute(apiRoutes.puesto.get);
+    this.route = getRoute(apiRoutes.puesto.getActive);
     return this.http.get<any>(this.route);
   }
   getCpt() {
     this.route = getRoute(apiRoutes.competencia.get);
+    return this.http.get<any>(this.route);
+  }
+  getDashboard(): Observable<DashboardModel> {
+    this.route = getRoute(apiRoutes.candidato.getdashboard);
     return this.http.get<any>(this.route);
   }
   post(data: CandidatoInputDto) {

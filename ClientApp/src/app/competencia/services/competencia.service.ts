@@ -18,6 +18,10 @@ export class CompetenciaService {
     this.route = getRoute(apiRoutes.competencia.get);
     return this.http.get<any>(this.route);
   }
+  getActive(): Observable<any> {
+    this.route = getRoute(apiRoutes.competencia.getActive);
+    return this.http.get<any>(this.route);
+  }
   getById(id: number): Observable<CompetenciaModel> {
     this.route = getRoute(apiRoutes.competencia.get);
     return this.http.get<any>(this.route + `/${id}`);

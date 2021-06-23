@@ -8,7 +8,7 @@ import { ApplicationPaths, QueryParameterNames } from './api-authorization.const
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizeGuard implements CanActivate {
+export class NoAuthorizeGuard implements CanActivate {
   constructor(private authorize: AuthorizeService, private router: Router) {
   }
   canActivate(
@@ -19,13 +19,10 @@ export class AuthorizeGuard implements CanActivate {
   }
 
   private handleAuthorization(isAuthenticated: boolean, state: RouterStateSnapshot) {
-    if (!isAuthenticated) {
-      this.router.navigate(ApplicationPaths.LoginPathComponents, {
-      // this.router.navigate(['/landing'], {
-        queryParams: {
-          [QueryParameterNames.ReturnUrl]: state.url
-        }
-      });
+    console.log(isAuthenticated);
+    if (isAuthenticated) {
+      this.router.navigate(['/home']).then(() => false);
     }
+    return true;
   }
 }

@@ -61,5 +61,25 @@ namespace OpenSourceWeb.Interfaces
             }
             return list;
         }
+
+        public async Task<IEnumerable<CompetenciaViewModel>> GetCompetenciasA()
+        {
+            var data = await _dbContext.Competencias
+                .Where(r => r.Estado == true)
+                .ToListAsync();
+            List<CompetenciaViewModel> list = new List<CompetenciaViewModel>();
+            foreach (var item in data)
+            {
+                list.Add(
+                    new CompetenciaViewModel
+                    {
+                        Codigo = item.Id,
+                        Descripcion = item.Descripcion,
+                        Estado = "Activo"
+                    }
+                 );
+            }
+            return list;
+        }
     }
 }

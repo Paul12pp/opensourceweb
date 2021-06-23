@@ -17,6 +17,10 @@ export class PuestoService {
     this.route = getRoute(apiRoutes.puesto.get);
     return this.http.get<any>(this.route);
   }
+  getActive(): Observable<any> {
+    this.route = getRoute(apiRoutes.puesto.getActive);
+    return this.http.get<any>(this.route);
+  }
   getById(id: number): Observable<PuestoModel> {
     this.route = getRoute(apiRoutes.puesto.get);
     return this.http.get<any>(this.route + `/${id}`);

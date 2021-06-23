@@ -24,6 +24,11 @@ namespace OpenSourceWeb.Controllers
         {
             return await _services.GetCompetencias();
         }
+        [HttpGet("getactive")]
+        public async Task<IEnumerable<CompetenciaViewModel>> GetCompetenciasA()
+        {
+            return await _services.GetCompetenciasA();
+        }
 
         [HttpGet("get/{id}")]
         public async Task<Competencias> GetCompetencia(int id)

@@ -10,6 +10,7 @@ namespace OpenSourceWeb.Interfaces
     public interface IPuesto
     {
         Task<IEnumerable<PuestoViewModel>> GetPuestos();
+        Task<IEnumerable<PuestoViewModel>> GetPuestosA();
         Task<IEnumerable<Departamento>> GetDepartamentos();
         Task AddPuesto(Puestos model);
         Task EditPuesto(int idPuesto, Puestos model);

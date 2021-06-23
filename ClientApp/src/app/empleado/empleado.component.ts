@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DepartamentoModel, PuestoModel } from '../puesto/model/puesto.model';
 import { EmpleadoModel } from './model/empleado.model';
 import { EmpleadoService } from './services/empleado.service';
+import { ValidateTool } from '../utils/validate-tool';
 
 @Component({
   selector: 'app-empleado',
@@ -43,41 +44,50 @@ export class EmpleadoComponent implements OnInit {
     console.log(form.value);
     console.log(form.valid);
     const id = form.value.id;
-    if (form.valid) {
-      Swal.fire({
-        title: 'Procesando',
-        showConfirmButton: false,
-        willOpen: () => {
-          Swal.showLoading();
-        }
-      });
-      const values = form.value;
-      delete values.id;
-      values.estado = values.estado === 'true' ? true : false;
-      console.log('aqui', values);
-      if (id !== null && id !== 0) {
-        this.services.edit(id, values).subscribe(result => {
-          console.log(result);
-          form.resetForm();
-          this.refresh();
-          Swal.close();
-          console.log('after', this.empleado);
+    if (ValidateTool.validDominicanID(form.value.cedula)) {
+      if (form.valid) {
+        Swal.fire({
+          title: 'Procesando',
+          showConfirmButton: false,
+          willOpen: () => {
+            Swal.showLoading();
+          }
         });
+        const values = form.value;
+        delete values.id;
+        values.estado = values.estado === 'true' ? true : false;
+        console.log('aqui', values);
+        if (id !== null && id !== 0) {
+          this.services.edit(id, values).subscribe(result => {
+            console.log(result);
+            form.resetForm();
+            this.refresh();
+            Swal.close();
+            console.log('after', this.empleado);
+          });
+        } else {
+          this.services.post(values).subscribe(result => {
+            console.log(result);
+            form.resetForm();
+            this.refresh();
+            Swal.close();
+          });
+        }
       } else {
-        this.services.post(values).subscribe(result => {
-          console.log(result);
-          form.resetForm();
-          this.refresh();
-          Swal.close();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Datos incompletos o erroneos.',
         });
       }
     } else {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Datos incompletos o erroneos.',
+        text: 'Cédula invalidad',
       });
     }
+
   }
   edit(id: number) {
     Swal.fire({
@@ -89,16 +99,16 @@ export class EmpleadoComponent implements OnInit {
     });
     this.services.getById(id).subscribe(result => {
       this.empleado = result;
-      this.empleado.fecha_Ing=moment(this.empleado.fecha_Ing).format('yyyy-MM-dd');
+      this.empleado.fecha_Ing = moment(this.empleado.fecha_Ing).format('yyyy-MM-dd');
       console.log('empleado', this.empleado);
       Swal.close();
     });
     console.log('edit');
   }
 
-  pattern(value:any){
+  pattern(value: any) {
     console.log(value)
-    this.empleado.cedula= value.replace(/[^0-9]*/g, '');
+    this.empleado.cedula = value.replace(/[^0-9]*/g, '');
   }
 
 }

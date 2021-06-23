@@ -1,6 +1,7 @@
 <header [class]="'header '+headerpdC" id="header" *ngIf="(isAuthenticated | async)">
     <div [class]="'header_toggle '+toggleC"> <i class='bx bx-menu' id="header-toggle" (click)="toggle()"></i> </div>
-    <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
+    <!-- <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div> -->
+    <div class="">Hello {{ userName | async }}</div>
 </header>
 <div [class]="'l-navbar '+navC" id="nav-bar" *ngIf="(isAuthenticated | async)">
     <nav class="nav">
@@ -34,7 +35,10 @@
                     <a [routerLink]="['/consulta']" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Consulta</span> </a>
                 </div>
                 <div [routerLinkActive]="['active']">
-                    <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Cerrar sesión</span> </a>
+                    <a [routerLink]="['/reporte']" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Reporte</span> </a>
+                </div>
+                <div [routerLinkActive]="['active']">
+                    <a [routerLink]='["/authentication/logout"]' [state]='{ local: true }' class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Cerrar sesión</span> </a>
                     <!-- <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> -->
                 </div>
             </div>

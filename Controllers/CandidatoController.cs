@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpenSourceWeb.Interfaces;
 using OpenSourceWeb.Models;
 using OpenSourceWeb.Models.Dto;
+using OpenSourceWeb.Models.ViewModels;
 
 namespace OpenSourceWeb.Controllers
 {
@@ -36,9 +37,14 @@ namespace OpenSourceWeb.Controllers
             return await _services.GetCandidatosByPuestos(id);
         }
         [HttpGet("getbycedula/{id}")]
-        public async Task<Candidatos> GetCandidatoByCedula(string cedula)
+        public async Task<Candidatos> GetCandidatoByCedula(string id)
         {
-            return await _services.GetCandidatoByCedula(cedula);
+            return await _services.GetCandidatoByCedula(id);
+        }
+        [HttpGet("getdashboard")]
+        public async Task<DashboardViewModel> GetDashboard()
+        {
+            return await _services.GetDashboard();
         }
         [HttpPost("post")]
         public async Task<IActionResult> PostCandidato(CandidatoInputDto model)

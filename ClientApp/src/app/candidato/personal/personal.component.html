@@ -6,7 +6,7 @@
             </div>
             <div class="row col mb-2">
                 <div class="col">
-                    <input type="text" class="form-control" [(ngModel)]="candidato.cedula" name="cedula" placeholder="Cedula" aria-label="cedula" required/>
+                    <input type="text" class="form-control" [(ngModel)]="candidato.cedula" name="cedula" (keyup)="candidato.cedula" placeholder="Cedula" aria-label="cedula" required/>
                 </div>
                 <div class="col">
                     <input type="text" class="form-control" [(ngModel)]="candidato.nombre" name="nombre" placeholder="Nombre" aria-label="Nombre" required/>

@@ -6,8 +6,9 @@ import { FetchDataComponent } from '../fetch-data/fetch-data.component';
 import { HomeComponent } from './home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full',canActivate: [AuthorizeGuard] },
-  { path: 'counter', component: CounterComponent,canActivate: [AuthorizeGuard] },
+  { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthorizeGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthorizeGuard] },
+  { path: 'counter', component: CounterComponent, canActivate: [AuthorizeGuard] },
   { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
 ];
@@ -15,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule { }

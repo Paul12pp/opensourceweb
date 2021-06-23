@@ -56,8 +56,15 @@ const routes: Routes = [
       )
   },
   {
+    path: 'reporte',
+    loadChildren: () =>
+      import('./reporte/reporte.module').then(
+        m => m.ReporteModule
+      )
+  },
+  {
     path: '',
-    redirectTo: 'landing',
+    redirectTo: 'home',
     pathMatch: 'full'
   }
 ];

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 
 @Component({
@@ -14,11 +15,13 @@ export class NavMenuComponent implements OnInit {
   bodypdC = '';
   headerpdC = '';
   public isAuthenticated: Observable<boolean>;
+  public userName: Observable<string>;
   constructor(private authorizeService: AuthorizeService) {
 
   }
   ngOnInit() {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
+    this.userName = this.authorizeService.getUser().pipe(map(u => u && u.name));
     if (!this.isAuthenticated) {
       //document.querySelector('body').style.paddingLeft = '20px';
     }

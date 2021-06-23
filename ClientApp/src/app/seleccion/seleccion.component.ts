@@ -5,8 +5,7 @@ import { CandidatoService } from '../candidato/services/candidato.service';
 
 @Component({
   selector: 'app-seleccion',
-  templateUrl: './seleccion.component.html',
-  styleUrls: ['./seleccion.component.css']
+  templateUrl: './seleccion.component.html'
 })
 export class SeleccionComponent implements OnInit {
 
