@@ -23,7 +23,10 @@ export class ReporteComponent implements OnInit {
   }
   submit(form: NgForm) {
     console.log(form.value);
-    if (form.valid) {
+    const { desde, hasta } = this.data;
+    this.data.desde = moment(this.data.desde).format('YYYY-MM-DD');
+    this.data.hasta = moment(this.data.hasta).format('YYYY-MM-DD');
+    if (form.valid && desde < hasta) {
       Swal.fire({
         title: 'Procesando',
         showConfirmButton: false,

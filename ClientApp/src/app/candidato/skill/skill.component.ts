@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { CandidatoModel, CapacitacionModel } from '../model/candidato.model';
 
@@ -52,7 +53,9 @@ export class SkillComponent implements OnInit {
   submit(f: NgForm) {
     console.log(f);
     console.log(this.capacitacion);
-    if (f.valid) {
+    const desde = moment(this.capacitacion[0].fecha_desde).format('YYYY-MM-DD');
+    const hasta = moment(this.capacitacion[0].fecha_hasta).format('YYYY-MM-DD');
+    if (f.valid && desde < hasta) {
       console.log(this.disabled);
       this.capacitacion = this.capacitacion.filter(r => r.descripcion !== '');
       const values = f.value;

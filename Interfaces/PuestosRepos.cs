@@ -92,6 +92,29 @@ namespace OpenSourceWeb.Interfaces
             return list;
         }
 
+        public async Task<IEnumerable<PuestoViewModel>> GetPuestosByDpt(int dpt)
+        {
+            var data = await _dbContext.Puestos
+               .Where(p => p.Estado == true && p.DepartamentoId == dpt)
+               .ToListAsync();
+            List<PuestoViewModel> list = new List<PuestoViewModel>();
+            foreach (var item in data)
+            {
+                list.Add(
+                    new PuestoViewModel
+                    {
+                        Codigo = item.Id,
+                        Nombre = item.Nombre,
+                        Nivel_Ma_Salarial = item.Nivel_Ma_Salarial.Value,
+                        Nivel_Mi_Salarial = item.Nivel_Mi_Salarial.Value,
+                        Nivel_Riesgo = item.Nivel_Riesgo,
+                        Estado = "Activo"
+                    }
+                 );
+            }
+            return list;
+        }
+
         public async Task<Puestos> GetPuestosById(int idPuesto)
         {
             return await _dbContext.Puestos

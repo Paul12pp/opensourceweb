@@ -15,7 +15,16 @@
                 <input type="text" class="form-control" [(ngModel)]="capacitacion[0].descripcion" name="descripcion0" placeholder="Descripción" aria-label="descripción" required>
             </div>
             <div class="col">
-                <input type="text" class="form-control " [(ngModel)]="capacitacion[0].nivel" name="nivel0" placeholder="Nivel" aria-label="nivel" required>
+                <select class="form-control " [(ngModel)]="capacitacion[0].nivel" name="nivel0" aria-label="nivel" required>
+                    <option value="">Seleccione un nivel</option>
+                    <option value="Grado">Grado</option>
+                    <option value="Post-grado">Post-grado</option>
+                    <option value="Maestría">Maestría</option>
+                    <option value="Doctorado">Doctorado</option>
+                    <option value="Técnico">Técnico</option>
+                    <option value="Gestión">Gestión</option>
+                </select>
+                <!-- <input type="text" class="form-control " [(ngModel)]="capacitacion[0].nivel" name="nivel0" placeholder="Nivel" aria-label="nivel" required> -->
             </div>
             <div class="col">
                 <input type="text" class="form-control" [(ngModel)]="capacitacion[0].institucion" name="institucion0" placeholder="Institución" aria-label="institución" required>
@@ -35,7 +44,16 @@
                 <input type="text" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].descripcion" name="descripcion1" placeholder="Descripción" aria-label="descripción">
             </div>
             <div class="col">
-                <input type="text" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].nivel" name="nivel1" placeholder="Nivel" aria-label="nivel">
+                <!-- <input type="text" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].nivel" name="nivel1" placeholder="Nivel" aria-label="nivel"> -->
+                <select class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].nivel" name="nivel1" placeholder="Nivel" aria-label="nivel">
+                    <option value="">Seleccione un nivel</option>
+                    <option value="Grado">Grado</option>
+                    <option value="Post-grado">Post-grado</option>
+                    <option value="Maestría">Maestría</option>
+                    <option value="Doctorado">Doctorado</option>
+                    <option value="Técnico">Técnico</option>
+                    <option value="Gestión">Gestión</option>
+                </select>
             </div>
             <div class="col">
                 <input type="text" class="form-control" [disabled]="disabled[1]" [(ngModel)]="capacitacion[1].institucion" name="institucion1" placeholder="Institución" aria-label="institución">
@@ -59,7 +77,16 @@
                 <input type="text" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].descripcion" name="descripcion2" placeholder="Descripción" aria-label="descripción">
             </div>
             <div class="col">
-                <input type="text" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].nivel" name="nivel2" placeholder="Nivel" aria-label="nivel">
+                <!-- <input type="text" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].nivel" name="nivel2" placeholder="Nivel" aria-label="nivel"> -->
+                <select class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].nivel" name="nivel2" placeholder="Nivel" aria-label="nivel">
+                    <option value="">Seleccione un nivel</option>
+                    <option value="Grado">Grado</option>
+                    <option value="Post-grado">Post-grado</option>
+                    <option value="Maestría">Maestría</option>
+                    <option value="Doctorado">Doctorado</option>
+                    <option value="Técnico">Técnico</option>
+                    <option value="Gestión">Gestión</option>
+                </select>
             </div>
             <div class="col">
                 <input type="text" class="form-control" [disabled]="disabled[2]" [(ngModel)]="capacitacion[2].institucion" name="institucion2" placeholder="Institución" aria-label="institución">

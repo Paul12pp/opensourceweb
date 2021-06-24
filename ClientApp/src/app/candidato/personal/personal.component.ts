@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CandidatoModel } from '../model/candidato.model';
 import { ValidateTool } from '../../utils/validate-tool';
+import { CandidatoService } from '../services/candidato.service';
+import { IdiomaService } from '../../idioma/services/idioma.service';
 
 @Component({
   selector: 'app-personal',
@@ -13,11 +15,17 @@ export class PersonalComponent implements OnInit {
 
   @Input() candidato: CandidatoModel;
   @Input() departamentos: any[];
-  @Input() puestos: any[];
+  // @Input() puestos: any[];
   @Input() show: any[];
-  constructor() { }
+  puestos: any[] = [];
+  idiomas: any[] = [];
+  constructor(private services: CandidatoService, private idioma: IdiomaService) { }
 
   ngOnInit() {
+    this.idioma.get()
+      .subscribe(result => {
+        this.idiomas = result;
+      });
   }
   submit(f: NgForm) {
     // console.log(f.value);
@@ -52,5 +60,14 @@ export class PersonalComponent implements OnInit {
   pattern(value: any) {
     console.log(value)
     this.candidato.cedula = value.replace(/[^0-9]*/g, '');
+  }
+  changeDpt() {
+    this.candidato.puestoId = 0;
+    if (this.candidato.departamentoId !== 0) {
+      this.services.getPtByDpt(this.candidato.departamentoId)
+        .subscribe(result => {
+          this.puestos = result;
+        });
+    }
   }
 }

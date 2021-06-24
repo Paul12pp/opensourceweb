@@ -15,6 +15,7 @@ export const apiRoutes = {
     puesto: {
         get: 'api/puesto/get',
         getActive: 'api/puesto/getactive',
+        getbydpt: 'api/puesto/getbydpt',
         getdpt: 'api/puesto/getdpt',
         post: 'api/puesto/post',
         edit: 'api/puesto/edit',

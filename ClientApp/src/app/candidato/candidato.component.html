@@ -10,7 +10,7 @@
         <button [ngClass]="{'btn-primary': show[2],'btn-secondary': !show[2]}" class="btn" (click)="changeTab(2)">Experiencias</button>
     </div>
     <div>
-        <app-personal *ngIf="show[0]" [show]="show" [candidato]='candidato' [puestos]="puestos" [departamentos]="departamentos"></app-personal>
+        <app-personal *ngIf="show[0]" [show]="show" [candidato]='candidato' [departamentos]="departamentos"></app-personal>
         <app-skill *ngIf="show[1]" [show]="show" (submitEvent)=onSubmitFull($event) [candidato]='candidato' [competencias]="competencias"></app-skill>
         <app-experience *ngIf="show[2]" [show]="show" (submitEvent)=onSubmitFull2($event)></app-experience>
     </div>

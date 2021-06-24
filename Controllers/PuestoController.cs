@@ -28,12 +28,18 @@ namespace OpenSourceWeb.Controllers
         {
             return await _services.GetPuestosA();
         }
+        [HttpGet("getbydpt/{id}")]
+        public async Task<IEnumerable<PuestoViewModel>> GetPuestosByDpt(int id)
+        {
+            return await _services.GetPuestosByDpt(id);
+        }
 
         [HttpGet("get/{id}")]
         public async Task<Puestos> GetPuesto(int id)
         {
             return await _services.GetPuestosById(id);
         }
+
         [HttpGet("getdpt")]
         public async Task<IEnumerable<Departamento>> GetDepartamento()
         {

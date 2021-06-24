@@ -33,8 +33,8 @@ export class CandidatoComponent implements OnInit {
     this.show = [true, false, false];
     this.services.getDpt()
       .subscribe(result => this.departamentos = result);
-    this.services.getPt()
-      .subscribe(result => this.puestos = result);
+    // this.services.getPt()
+    //   .subscribe(result => this.puestos = result);
     this.services.getCpt()
       .subscribe(result => this.competencias = result);
   }

@@ -30,7 +30,7 @@ export class ConsultaComponent implements OnInit {
     console.log(form.value);
     console.log(form.valid);
     const id = form.value.id;
-    if (form.valid) {
+    if (form.valid && this.buscar.salarioD < this.buscar.salarioH) {
       Swal.fire({
         title: 'Procesando',
         showConfirmButton: false,
@@ -52,11 +52,11 @@ export class ConsultaComponent implements OnInit {
       });
     }
   }
-  limpiar(){
-    this.buscar={
+  limpiar() {
+    this.buscar = {
       nombre: '', competencia: '',
       puesto: 0, salarioD: 0, salarioH: 0
     };
-    
+
   }
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { CandidatoModel, ExperienciaModel } from '../model/candidato.model';
 
@@ -65,7 +66,9 @@ export class ExperienceComponent implements OnInit {
   submit(f: NgForm) {
     console.log(f);
     console.log(this.experiencia);
-    if (f.valid) {
+    const desde = moment(this.experiencia[0].fecha_desde).format('YYYY-MM-DD');
+    const hasta = moment(this.experiencia[0].fecha_hasta).format('YYYY-MM-DD');
+    if (f.valid && desde < hasta) {
       console.log(this.disabled);
       //this.experiencia = this.experiencia.filter(r => r.empresa !== '');
       console.log(this.experiencia);

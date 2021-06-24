@@ -42,12 +42,16 @@ export class CandidatoService {
     this.route = getRoute(apiRoutes.puesto.getdpt);
     return this.http.get<any>(this.route);
   }
+  getPtByDpt(id: number) {
+    this.route = getRoute(apiRoutes.puesto.getbydpt);
+    return this.http.get<any>(this.route + `/${id}`);
+  }
   getPt() {
     this.route = getRoute(apiRoutes.puesto.getActive);
     return this.http.get<any>(this.route);
   }
   getCpt() {
-    this.route = getRoute(apiRoutes.competencia.get);
+    this.route = getRoute(apiRoutes.competencia.getActive);
     return this.http.get<any>(this.route);
   }
   getDashboard(): Observable<DashboardModel> {
